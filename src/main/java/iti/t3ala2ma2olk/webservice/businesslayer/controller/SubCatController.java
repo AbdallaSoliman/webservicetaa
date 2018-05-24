@@ -24,23 +24,23 @@ public class SubCatController {
      @Autowired
     private SubCatService subCatService;
     
-        @RequestMapping("/getSubCat")       
+        @RequestMapping("/SubCat")       
     public List<SubCat> getAllSubCat(){
         return subCatService.getAllSubCat();
     }
-    @RequestMapping("/getSubCat/{id}")  
+    @RequestMapping("/SubCat/{id}")  
     public SubCat getSubCat(@PathVariable Integer id){
         return subCatService.getSubCat(id);
     }
-    @RequestMapping(method = RequestMethod.POST,value= "/getSubCat") 
+    @RequestMapping(method = RequestMethod.POST,value= "/SubCat") 
     public void addSubCat(@RequestBody SubCat  subCat){
         subCatService.addSubCat(subCat);
     }
-        @RequestMapping(method = RequestMethod.PUT,value= "/getSubCat") 
+        @RequestMapping(method = RequestMethod.PUT,value= "/SubCat") 
     public void updateSubCat(@RequestBody SubCat  subCat){
         subCatService.updateSubCat(subCat);
     }
-    @RequestMapping(method = RequestMethod.DELETE,value= "/getSubCat/{id}")  
+    @RequestMapping(method = RequestMethod.DELETE,value= "/SubCat/{id}")  
     public void deleteSubCat(@PathVariable Integer id){
          subCatService.deleteSubCat(id);
     }

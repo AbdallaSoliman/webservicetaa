@@ -24,23 +24,23 @@ public class ReportController {
      @Autowired
     private ReportService reportService;
     
-        @RequestMapping("/getReport")       
+        @RequestMapping("/Report")       
     public List<Report> getAllReport(){
         return reportService.getAllReport();
     }
-    @RequestMapping("/getReport/{id}")  
+    @RequestMapping("/Report/{id}")  
     public Report getReport(@PathVariable Integer id){
         return reportService.getReport(id);
     }
-    @RequestMapping(method = RequestMethod.POST,value= "/getReport") 
+    @RequestMapping(method = RequestMethod.POST,value= "/Report") 
     public void addReport(@RequestBody Report  report){
         reportService.addReport(report);
     }
-        @RequestMapping(method = RequestMethod.PUT,value= "/getReport") 
+        @RequestMapping(method = RequestMethod.PUT,value= "/Report") 
     public void updateReport(@RequestBody Report  report){
         reportService.updateReport(report);
     }
-    @RequestMapping(method = RequestMethod.DELETE,value= "/getReport/{id}")  
+    @RequestMapping(method = RequestMethod.DELETE,value= "/Report/{id}")  
     public void deleteReport(@PathVariable Integer id){
          reportService.deleteReport(id);
     }

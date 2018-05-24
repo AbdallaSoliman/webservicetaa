@@ -24,23 +24,23 @@ public class TaaUserController {
      @Autowired
     private TaaUserService taaUserService;
     
-        @RequestMapping("/getTaaUser")       
+        @RequestMapping("/TaaUser")       
     public List<TaaUser> getAllTaaUser(){
         return taaUserService.getAllTaaUser();
     }
-    @RequestMapping("/getTaaUser/{id}")  
+    @RequestMapping("/TaaUser/{id}")  
     public TaaUser getTaaUser(@PathVariable Integer id){
         return taaUserService.getTaaUser(id);
     }
-    @RequestMapping(method = RequestMethod.POST,value= "/getTaaUser") 
+    @RequestMapping(method = RequestMethod.POST,value= "/TaaUser") 
     public TaaUser addTaaUser(@RequestBody TaaUser  taaUser){
        return taaUserService.addTaaUser(taaUser);
     }
-        @RequestMapping(method = RequestMethod.PUT,value= "/getTaaUser") 
+        @RequestMapping(method = RequestMethod.PUT,value= "/TaaUser") 
     public TaaUser updateTaaUser(@RequestBody TaaUser  taaUser){
       return  taaUserService.updateTaaUser(taaUser);
     }
-    @RequestMapping(method = RequestMethod.DELETE,value= "/getTaaUser/{id}")  
+    @RequestMapping(method = RequestMethod.DELETE,value= "/TaaUser/{id}")  
     public void deleteTaaUser(@PathVariable Integer id){
          taaUserService.deleteTaaUser(id);
     }

@@ -25,24 +25,28 @@ public class PersonController {
      @Autowired
     private PersonService personService;
     
-        @RequestMapping("/getPerson")       
+        @RequestMapping("/Person")       
     public List<Person> getAllPerson(){
         return personService.getAllPerson();
     }
-    @RequestMapping("/getPerson/{id}")  
+    @RequestMapping("/Person/{id}")  
     public Person getPerson(@PathVariable Integer id){
         return personService.getPerson(id);
     }
-    @RequestMapping(method = RequestMethod.POST,value= "/getPerson") 
+    @RequestMapping(method = RequestMethod.POST,value= "/Person") 
     public Person addPerson(@RequestBody Person  person){
       return personService.addPerson(person);
     }
-        @RequestMapping(method = RequestMethod.PUT,value= "/getPerson") 
+        @RequestMapping(method = RequestMethod.PUT,value= "/Person") 
     public Person updatePerson(@RequestBody Person  person){
       return  personService.updatePerson(person);
     }
-    @RequestMapping(method = RequestMethod.DELETE,value= "/getPerson/{id}")  
+    @RequestMapping(method = RequestMethod.DELETE,value= "/Person/{id}")  
     public void deletePerson(@PathVariable Integer id){
          personService.deletePerson(id);
+    }
+    @RequestMapping(method = RequestMethod.POST,value= "/Person/Login") 
+    public Person getPersonLogin(@RequestBody Person  person){
+      return personService.loginPerson(person);
     }
 }

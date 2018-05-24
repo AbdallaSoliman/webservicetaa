@@ -24,23 +24,23 @@ public class QuestionController {
      @Autowired
     private QuestionService questionService;
     
-        @RequestMapping("/getQuestion")       
+        @RequestMapping("/Question")       
     public List<Question> getAllQuestion(){
         return questionService.getAllQuestion();
     }
-    @RequestMapping("/getQuestion/{id}")  
+    @RequestMapping("/Question/{id}")  
     public Question getQuestion(@PathVariable Integer id){
         return questionService.getQuestion(id);
     }
-    @RequestMapping(method = RequestMethod.POST,value= "/getQuestion") 
+    @RequestMapping(method = RequestMethod.POST,value= "/Question") 
     public void addQuestion(@RequestBody Question  question){
         questionService.addQuestion(question);
     }
-        @RequestMapping(method = RequestMethod.PUT,value= "/getQuestion") 
+        @RequestMapping(method = RequestMethod.PUT,value= "/Question") 
     public void updateQuestion(@RequestBody Question  question){
         questionService.updateQuestion(question);
     }
-    @RequestMapping(method = RequestMethod.DELETE,value= "/getQuestion/{id}")  
+    @RequestMapping(method = RequestMethod.DELETE,value= "/Question/{id}")  
     public void deleteQuestion(@PathVariable Integer id){
          questionService.deleteQuestion(id);
     }

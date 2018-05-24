@@ -24,23 +24,23 @@ public class CustomerServiceController {
      @Autowired
     private CustomerServiceService customerServiceService;
     
-        @RequestMapping("/getCustomerService")       
+        @RequestMapping("/CustomerService")       
     public List<CustomerService> getAllCustomerService(){
         return customerServiceService.getAllCustomerService();
     }
-    @RequestMapping("/getCustomerService/{id}")  
+    @RequestMapping("/CustomerService/{id}")  
     public CustomerService getCustomerService(@PathVariable Integer id){
         return customerServiceService.getCustomerService(id);
     }
-    @RequestMapping(method = RequestMethod.POST,value= "/getCustomerService") 
+    @RequestMapping(method = RequestMethod.POST,value= "/CustomerService") 
     public CustomerService addCustomerService(@RequestBody CustomerService  customerService){
        return customerServiceService.addCustomerService(customerService);
     }
-        @RequestMapping(method = RequestMethod.PUT,value= "/getCustomerService") 
+        @RequestMapping(method = RequestMethod.PUT,value= "/CustomerService") 
     public CustomerService updateCustomerService(@RequestBody CustomerService  customerService){
       return  customerServiceService.updateCustomerService(customerService);
     }
-    @RequestMapping(method = RequestMethod.DELETE,value= "/getCustomerService/{id}")  
+    @RequestMapping(method = RequestMethod.DELETE,value= "/CustomerService/{id}")  
     public void deleteCustomerService(@PathVariable Integer id){
          customerServiceService.deleteCustomerService(id);
     }

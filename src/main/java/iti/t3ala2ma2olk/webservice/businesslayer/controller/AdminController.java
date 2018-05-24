@@ -24,23 +24,23 @@ public class AdminController {
      @Autowired
     private AdminService adminService;
     
-        @RequestMapping("/getAdmin")       
+        @RequestMapping("/Admin")       
     public List<Admin> getAllAdmin(){
         return adminService.getAllAdmin();
     }
-    @RequestMapping("/getAdmin/{id}")  
+    @RequestMapping("/Admin/{id}")  
     public Admin getAdmin(@PathVariable Integer id){
         return adminService.getAdmin(id);
     }
-    @RequestMapping(method = RequestMethod.POST,value= "/getAdmin") 
+    @RequestMapping(method = RequestMethod.POST,value= "/Admin") 
     public void addAdmin(@RequestBody Admin  admin){
         adminService.addAdmin(admin);
     }
-        @RequestMapping(method = RequestMethod.PUT,value= "/getAdmin") 
+        @RequestMapping(method = RequestMethod.PUT,value= "/Admin") 
     public void updateAdmin(@RequestBody Admin  admin){
         adminService.updateAdmin(admin);
     }
-    @RequestMapping(method = RequestMethod.DELETE,value= "/getAdmin/{id}")  
+    @RequestMapping(method = RequestMethod.DELETE,value= "/Admin/{id}")  
     public void deleteAdmin(@PathVariable Integer id){
          adminService.deleteAdmin(id);
     }

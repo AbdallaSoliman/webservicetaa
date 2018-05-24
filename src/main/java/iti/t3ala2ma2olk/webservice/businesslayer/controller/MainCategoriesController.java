@@ -24,23 +24,23 @@ public class MainCategoriesController {
      @Autowired
     private MainCategoriesService mainCategoriesService;
     
-        @RequestMapping("/getMainCategories")       
+        @RequestMapping("/MainCategories")       
     public List<MainCategories> getAllMainCategories(){
         return mainCategoriesService.getAllMainCategories();
     }
-    @RequestMapping("/getMainCategories/{id}")  
+    @RequestMapping("/MainCategories/{id}")  
     public MainCategories getMainCategories(@PathVariable Integer id){
         return mainCategoriesService.getMainCategories(id);
     }
-    @RequestMapping(method = RequestMethod.POST,value= "/getMainCategories") 
+    @RequestMapping(method = RequestMethod.POST,value= "/MainCategories") 
     public void addMainCategories(@RequestBody MainCategories  mainCategories){
         mainCategoriesService.addMainCategories(mainCategories);
     }
-        @RequestMapping(method = RequestMethod.PUT,value= "/getMainCategories") 
+        @RequestMapping(method = RequestMethod.PUT,value= "/MainCategories") 
     public void updateMainCategories(@RequestBody MainCategories  mainCategories){
         mainCategoriesService.updateMainCategories(mainCategories);
     }
-    @RequestMapping(method = RequestMethod.DELETE,value= "/getMainCategories/{id}")  
+    @RequestMapping(method = RequestMethod.DELETE,value= "/MainCategories/{id}")  
     public void deleteMainCategories(@PathVariable Integer id){
          mainCategoriesService.deleteMainCategories(id);
     }

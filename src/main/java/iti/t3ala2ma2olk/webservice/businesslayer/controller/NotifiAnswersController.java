@@ -24,23 +24,23 @@ public class NotifiAnswersController {
      @Autowired
     private NotifiAnswersService notifiAnswersService;
     
-        @RequestMapping("/getNotifiAnswers")       
+        @RequestMapping("/NotifiAnswers")       
     public List<NotifiAnswers> getAllNotifiAnswers(){
         return notifiAnswersService.getAllNotifiAnswers();
     }
-    @RequestMapping("/getNotifiAnswers/{id}")  
+    @RequestMapping("/NotifiAnswers/{id}")  
     public NotifiAnswers getNotifiAnswers(@PathVariable Integer id){
         return notifiAnswersService.getNotifiAnswers(id);
     }
-    @RequestMapping(method = RequestMethod.POST,value= "/getNotifiAnswers") 
+    @RequestMapping(method = RequestMethod.POST,value= "/NotifiAnswers") 
     public void addNotifiAnswers(@RequestBody NotifiAnswers  notifiAnswers){
         notifiAnswersService.addNotifiAnswers(notifiAnswers);
     }
-        @RequestMapping(method = RequestMethod.PUT,value= "/getNotifiAnswers") 
+        @RequestMapping(method = RequestMethod.PUT,value= "/NotifiAnswers") 
     public void updateNotifiAnswers(@RequestBody NotifiAnswers  notifiAnswers){
         notifiAnswersService.updateNotifiAnswers(notifiAnswers);
     }
-    @RequestMapping(method = RequestMethod.DELETE,value= "/getNotifiAnswers/{id}")  
+    @RequestMapping(method = RequestMethod.DELETE,value= "/NotifiAnswers/{id}")  
     public void deleteNotifiAnswers(@PathVariable Integer id){
          notifiAnswersService.deleteNotifiAnswers(id);
     }

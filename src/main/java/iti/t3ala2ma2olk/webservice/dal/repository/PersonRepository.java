@@ -6,6 +6,7 @@
 package iti.t3ala2ma2olk.webservice.dal.repository;
 
 import iti.t3ala2ma2olk.webservice.security.model.Person;
+import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -16,5 +17,7 @@ public interface PersonRepository extends  CrudRepository<Person, Integer>{
   //  Person findByUsername(String username);
     public Person findPersonByEmail(String email);
     public Person findByUsername(String username);
+    public Person findByUsernameAndPassword(String username,String password);
+//    public  List<Person> findByTaaUser(null);
     
 }
