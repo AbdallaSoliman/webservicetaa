@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="iti.t3ala2ma2olk_webservice_jar_0.0.1-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>iti.t3ala2ma2olk.webservice.dal.entity.Answers</class>
+    <class>iti.t3ala2ma2olk.webservice.dal.entity.Admin</class>
+    <class>iti.t3ala2ma2olk.webservice.dal.entity.NotifiCustomerService</class>
+    <class>iti.t3ala2ma2olk.webservice.dal.entity.MainCategories</class>
+    <class>iti.t3ala2ma2olk.webservice.dal.entity.CustomerService</class>
+    <class>iti.t3ala2ma2olk.webservice.dal.entity.Question</class>
+    <class>iti.t3ala2ma2olk.webservice.dal.entity.NotifiAnswers</class>
+    <class>iti.t3ala2ma2olk.webservice.dal.entity.Report</class>
+    <class>iti.t3ala2ma2olk.webservice.dal.entity.SubCat</class>
+    <class>iti.t3ala2ma2olk.webservice.dal.entity.TaaUser</class>
+    <class>iti.t3ala2ma2olk.webservice.security.model.Authority_1</class>
+    <class>iti.t3ala2ma2olk.webservice.security.model.Person</class>
+    <class>iti.t3ala2ma2olk.webservice.dal.entity.UserAuthority</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/t3ala_ama_olk?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="root"/>
+    </properties>
+  </persistence-unit>
+</persistence>
