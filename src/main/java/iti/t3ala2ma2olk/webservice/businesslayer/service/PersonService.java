@@ -88,7 +88,7 @@ public class PersonService {
     }
 
     public Person loginPerson(Person person) {
-        return personRepository.findByUsernameAndPassword(person.getUsername(), person.getPassword());
+        return personRepository.findByUsernameAndPassword(person.getUsername(), bCryptPasswordEncoder.encode(person.getPassword()));
     }
 
 }
