@@ -8,7 +8,6 @@ package iti.t3ala2ma2olk.webservice.businesslayer.service;
 import iti.t3ala2ma2olk.webservice.businesslayer.msg.RegistrationMassage;
 import iti.t3ala2ma2olk.webservice.security.model.Person;
 import iti.t3ala2ma2olk.webservice.dal.repository.PersonRepository;
-import iti.t3ala2ma2olk.webservice.dto.UserProfile;
 import iti.t3ala2ma2olk.webservice.security.model.Authority;
 import iti.t3ala2ma2olk.webservice.security.model.AuthorityName;
 import java.util.ArrayList;
@@ -83,19 +82,6 @@ public class PersonService {
         }
         return null;
     }
-
-//    public List<UserProfile> loginPerson() {
-
-//    public List<UserProfile> getAllUserProfile(){
-//        
-////             List<Person> myIntList = new ArrayList<>();
-////        personRepository.findAll().forEach(myIntList::add);
-////       for( myIntList in i){
-////           
-////       }
-////        
-////        return myIntList; 
-//    }
 
     public void deletePerson(Integer id) {
         personRepository.deleteById(id);
