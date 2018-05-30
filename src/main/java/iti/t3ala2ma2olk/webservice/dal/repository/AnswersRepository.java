@@ -6,6 +6,9 @@
 package iti.t3ala2ma2olk.webservice.dal.repository;
 
 import iti.t3ala2ma2olk.webservice.dal.entity.Answers;
+import iti.t3ala2ma2olk.webservice.dal.entity.Question;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -13,5 +16,8 @@ import org.springframework.data.repository.CrudRepository;
  * @author abdalla
  */
 public interface AnswersRepository extends  CrudRepository<Answers, Integer>{
+
+//    public Page<Answers> findByQuestionId(Question questionId);
     
+     Page<Answers> findAll(Pageable pageable);
 }

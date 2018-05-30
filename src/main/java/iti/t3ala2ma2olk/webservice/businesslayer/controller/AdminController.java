@@ -7,10 +7,15 @@ package iti.t3ala2ma2olk.webservice.businesslayer.controller;
 
 import iti.t3ala2ma2olk.webservice.businesslayer.service.AdminService;
 import iti.t3ala2ma2olk.webservice.dal.entity.Admin;
+import iti.t3ala2ma2olk.webservice.dto.AdminDTO;
+import iti.t3ala2ma2olk.webservice.dto.profile.LoginProfile;
+import iti.t3ala2ma2olk.webservice.dto.profile.util.DTO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,27 +26,37 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class AdminController {
-     @Autowired
+
+    @Autowired
     private AdminService adminService;
-    
-        @RequestMapping("/Admin")       
-    public List<Admin> getAllAdmin(){
-        return adminService.getAllAdmin();
+
+    @RequestMapping("/Admin")
+    public List<Admin> getAllAdmin(@PageableDefault(value=10, page=0) Pageable pageabl) {
+        return adminService.getAllAdmin(pageabl);
     }
-    @RequestMapping("/Admin/{id}")  
-    public Admin getAdmin(@PathVariable Integer id){
+
+    @RequestMapping("/Admin/{id}")
+    public ResponseEntity<?> getAdmin(@PathVariable Integer id) {
         return adminService.getAdmin(id);
     }
-    @RequestMapping(method = RequestMethod.POST,value= "/Admin") 
-    public void addAdmin(@RequestBody Admin  admin){
-        adminService.addAdmin(admin);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/Admin")
+    public ResponseEntity<?> addAdmin(@DTO(AdminDTO.class) Admin admin) {
+        return adminService.addAdmin(admin);
     }
-        @RequestMapping(method = RequestMethod.PUT,value= "/Admin") 
-    public void updateAdmin(@RequestBody Admin  admin){
-        adminService.updateAdmin(admin);
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/Admin")
+    public ResponseEntity<?> updateAdmin(@DTO(AdminDTO.class) Admin admin) {
+        return adminService.updateAdmin(admin);
     }
-    @RequestMapping(method = RequestMethod.DELETE,value= "/Admin/{id}")  
-    public void deleteAdmin(@PathVariable Integer id){
-         adminService.deleteAdmin(id);
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/Admin/{id}")
+    public ResponseEntity<?> deleteAdmin(@PathVariable Integer id) {
+        return adminService.deleteAdmin(id);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/Admin/Login")
+    public ResponseEntity<?> login(@DTO(LoginProfile.class) Admin admin) {
+        return adminService.login(admin);
     }
 }

@@ -7,6 +7,8 @@ package iti.t3ala2ma2olk.webservice.businesslayer.controller;
 
 import iti.t3ala2ma2olk.webservice.businesslayer.service.CustomerServiceService;
 import iti.t3ala2ma2olk.webservice.dal.entity.CustomerService;
+import iti.t3ala2ma2olk.webservice.dto.CustomerServiceDTO;
+import iti.t3ala2ma2olk.webservice.dto.profile.util.DTO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,11 +35,11 @@ public class CustomerServiceController {
         return customerServiceService.getCustomerService(id);
     }
     @RequestMapping(method = RequestMethod.POST,value= "/CustomerService") 
-    public CustomerService addCustomerService(@RequestBody CustomerService  customerService){
+    public CustomerService addCustomerService(@DTO(CustomerServiceDTO.class) CustomerService  customerService){
        return customerServiceService.addCustomerService(customerService);
     }
         @RequestMapping(method = RequestMethod.PUT,value= "/CustomerService") 
-    public CustomerService updateCustomerService(@RequestBody CustomerService  customerService){
+    public CustomerService updateCustomerService(@DTO(CustomerServiceDTO.class) CustomerService  customerService){
       return  customerServiceService.updateCustomerService(customerService);
     }
     @RequestMapping(method = RequestMethod.DELETE,value= "/CustomerService/{id}")  

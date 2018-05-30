@@ -7,10 +7,13 @@ package iti.t3ala2ma2olk.webservice.businesslayer.controller;
 
 import iti.t3ala2ma2olk.webservice.businesslayer.service.AnswersService;
 import iti.t3ala2ma2olk.webservice.dal.entity.Answers;
+import iti.t3ala2ma2olk.webservice.dto.AnswersDTO;
+import iti.t3ala2ma2olk.webservice.dto.profile.LoginProfile;
+import iti.t3ala2ma2olk.webservice.dto.profile.util.DTO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,27 +24,33 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class AnswersController {
-     @Autowired
+
+    @Autowired
     private AnswersService answersService;
-    
-        @RequestMapping("/Answers")       
-    public List<Answers> getAllAnswers(){
+
+    @RequestMapping("/Answers")
+    public List<Answers> getAllAnswers() {
         return answersService.getAllAnswers();
     }
-    @RequestMapping("/Answers/{id}")  
-    public Answers getAnswers(@PathVariable Integer id){
+
+    @RequestMapping("/Answers/{id}")
+    public ResponseEntity<?> getAnswers(@PathVariable Integer id) {
         return answersService.getAnswers(id);
     }
-    @RequestMapping(method = RequestMethod.POST,value= "/Answers") 
-    public void addAnswers(@RequestBody Answers  answers){
-        answersService.addAnswers(answers);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/Answers")
+    public ResponseEntity<?> addAnswers(@DTO(AnswersDTO.class) Answers answers) {
+        return answersService.addAnswers(answers);
     }
-        @RequestMapping(method = RequestMethod.PUT,value= "/Answers") 
-    public void updateAnswers(@RequestBody Answers  answers){
-        answersService.updateAnswers(answers);
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/Answers")
+    public ResponseEntity<?> updateAnswers(@DTO(AnswersDTO.class) Answers answers) {
+        return answersService.updateAnswers(answers);
     }
-    @RequestMapping(method = RequestMethod.DELETE,value= "/Answers/{id}")  
-    public void deleteAnswers(@PathVariable Integer id){
-         answersService.deleteAnswers(id);
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/Answers/{id}")
+    public ResponseEntity<?> deleteAnswers(@PathVariable Integer id) {
+        return answersService.deleteAnswers(id);
     }
+
 }

@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "customer_service")
-@XmlRootElement
+
 @NamedQueries({
     @NamedQuery(name = "CustomerService.findAll", query = "SELECT c FROM CustomerService c")
     , @NamedQuery(name = "CustomerService.findByService", query = "SELECT c FROM CustomerService c WHERE c.service = :service")

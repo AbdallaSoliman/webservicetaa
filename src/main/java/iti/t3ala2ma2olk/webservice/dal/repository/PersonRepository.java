@@ -7,6 +7,8 @@ package iti.t3ala2ma2olk.webservice.dal.repository;
 
 import iti.t3ala2ma2olk.webservice.security.model.Person;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -19,5 +21,7 @@ public interface PersonRepository extends  CrudRepository<Person, Integer>{
     public Person findByUsername(String username);
     public Person findByUsernameAndPassword(String username,String password);
 //    public  List<Person> findByTaaUser(null);
+
+    public Page findAll(Pageable pageable);
     
 }

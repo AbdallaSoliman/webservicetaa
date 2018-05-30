@@ -5,13 +5,18 @@
  */
 package iti.t3ala2ma2olk.webservice.businesslayer.controller;
 
-import iti.t3ala2ma2olk.webservice.businesslayer.msg.RegistrationMassage;
 import iti.t3ala2ma2olk.webservice.businesslayer.service.PersonService;
+
+import iti.t3ala2ma2olk.webservice.dto.PersonDTO;
+import iti.t3ala2ma2olk.webservice.dto.profile.LoginProfile;
+import iti.t3ala2ma2olk.webservice.dto.profile.util.DTO;
 import iti.t3ala2ma2olk.webservice.security.model.Person;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,31 +27,37 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class PersonController {
-     @Autowired
+
+    @Autowired
     private PersonService personService;
-    
-        @RequestMapping("/Person")       
-    public List<Person> getAllPerson(){
-        return personService.getAllPerson();
+
+    @RequestMapping("/Person")
+    public List<Person> getAllPerson(@PageableDefault(value=10, page=0) Pageable pageabl) {
+        return personService.getAllPerson(pageabl);
     }
-    @RequestMapping("/Person/{id}")  
-    public Person getPerson(@PathVariable Integer id){
+
+    @RequestMapping("/Person/{id}")
+    public ResponseEntity<?> getPerson(@PathVariable Integer id) {
         return personService.getPerson(id);
     }
-    @RequestMapping(method = RequestMethod.POST,value= "/Person") 
-    public Person addPerson(@RequestBody Person  person){
-      return personService.addPerson(person);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/Person")
+    public ResponseEntity<?> addPerson(@DTO(PersonDTO.class) Person person) {
+        return personService.addPerson(person);
     }
-        @RequestMapping(method = RequestMethod.PUT,value= "/Person") 
-    public Person updatePerson(@RequestBody Person  person){
-      return  personService.updatePerson(person);
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/Person")
+    public ResponseEntity<?> updatePerson(@DTO(PersonDTO.class) Person person) {
+        return personService.updatePerson(person);
     }
-    @RequestMapping(method = RequestMethod.DELETE,value= "/Person/{id}")  
-    public void deletePerson(@PathVariable Integer id){
-         personService.deletePerson(id);
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/Person/{id}")
+    public ResponseEntity<?> deletePerson(@PathVariable Integer id) {
+        return personService.deletePerson(id);
     }
-    @RequestMapping(method = RequestMethod.POST,value= "/Person/Login") 
-    public Person getPersonLogin(@RequestBody Person  person){
-      return personService.loginPerson(person);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/Person/Login")
+    public ResponseEntity<?> login(@DTO(LoginProfile.class) Person person) {
+        return personService.login(person);
     }
 }

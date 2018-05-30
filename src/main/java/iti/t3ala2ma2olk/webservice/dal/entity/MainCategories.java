@@ -8,6 +8,7 @@ package iti.t3ala2ma2olk.webservice.dal.entity;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "main_categories")
-@XmlRootElement
+
 @NamedQueries({
     @NamedQuery(name = "MainCategories.findAll", query = "SELECT m FROM MainCategories m")
     , @NamedQuery(name = "MainCategories.findByMainCategoriesId", query = "SELECT m FROM MainCategories m WHERE m.mainCategoriesId = :mainCategoriesId")
@@ -43,7 +44,7 @@ public class MainCategories implements Serializable {
     @Size(max = 45)
     @Column(name = "cat_name")
     private String catName;
-    @OneToMany(mappedBy = "mainCategoriesId")
+    @OneToMany(mappedBy = "mainCategoriesId",cascade = CascadeType.ALL)
     private Collection<SubCat> subCatCollection;
 
     public MainCategories() {

@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "admin")
-@XmlRootElement
+
 @NamedQueries({
     @NamedQuery(name = "Admin.findAll", query = "SELECT a FROM Admin a")
     , @NamedQuery(name = "Admin.findByAdminId", query = "SELECT a FROM Admin a WHERE a.adminId = :adminId")
@@ -41,7 +41,7 @@ public class Admin implements Serializable {
     @Size(max = 45)
     @Column(name = "username")
     private String username;
-    @Size(max = 45)
+    @Size(max = 70)
     @Column(name = "password")
     private String password;
 

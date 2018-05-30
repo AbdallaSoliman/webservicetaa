@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "sub_cat")
-@XmlRootElement
+
 @NamedQueries({
     @NamedQuery(name = "SubCat.findAll", query = "SELECT s FROM SubCat s")
     , @NamedQuery(name = "SubCat.findBySubCatId", query = "SELECT s FROM SubCat s WHERE s.subCatId = :subCatId")
