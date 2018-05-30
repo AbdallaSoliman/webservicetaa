@@ -7,9 +7,23 @@ package iti.t3ala2ma2olk.webservice.businesslayer.service;
 
 import iti.t3ala2ma2olk.webservice.dal.entity.Question;
 import iti.t3ala2ma2olk.webservice.dal.repository.QuestionRepository;
+import iti.t3ala2ma2olk.webservice.dto.QuestionDTO;
+import iti.t3ala2ma2olk.webservice.businesslayer.msg.AddMessage;
+import iti.t3ala2ma2olk.webservice.businesslayer.msg.DeleteMessage;
+import iti.t3ala2ma2olk.webservice.businesslayer.msg.FindMessage;
+import iti.t3ala2ma2olk.webservice.businesslayer.msg.LoginMessage;
+import iti.t3ala2ma2olk.webservice.businesslayer.msg.RegistrationMessage;
+import iti.t3ala2ma2olk.webservice.businesslayer.msg.UpdateMessage;
 import java.util.ArrayList;
 import java.util.List;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,28 +32,53 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class QuestionService {
-        @Autowired
+
+    @Autowired
     private QuestionRepository questionRepository;
-    
-     public List<Question> getAllQuestion(){
-            List<Question> myIntList= new ArrayList<>();
-            questionRepository.findAll().forEach(myIntList::add);
-        return myIntList;
-    }
-    public  Question getQuestion(Integer id){
-            return questionRepository.findById(id).orElse(null);
+
+    private static final ModelMapper modelMapper = new ModelMapper();
+
+    public List<Question> getAllQuestion(Pageable pageable) {
+        Page page = questionRepository.findAll(pageable);
+        return page.getContent();
     }
 
-    public void addQuestion(Question topic) {
-        questionRepository.save(topic);
-   }
+    public ResponseEntity<?> getQuestion(Integer id) {
 
-    public void updateQuestion(Question topic) {
-             questionRepository.save(topic);
+        if (modelMapper.map(questionRepository.findById(id).orElse(null), QuestionDTO.class) != null) {
+            return new ResponseEntity<>(modelMapper.map(questionRepository.findById(id).orElse(null), QuestionDTO.class), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(FindMessage.fail, HttpStatus.OK);
+        }
     }
 
-   public void deleteQuestion(Integer id) {
-         questionRepository.deleteById(id);
+    public ResponseEntity<?> addQuestion(Question question) {
+
+
+            question.setQuestionId(null);
+            //   Question  has been added successfully
+            questionRepository.save(question);
+            return new ResponseEntity<>(AddMessage.success, HttpStatus.OK);
+        
     }
-    
+
+    public ResponseEntity<?> updateQuestion(Question question) {
+        Question userExists = questionRepository.findById(question.getQuestionId()).orElse(null);
+        if (userExists != null) {
+
+                 questionRepository.save(question);
+                  return new ResponseEntity<>(UpdateMessage.success, HttpStatus.OK);
+   
+        } else {
+            // There is a updateQuestion  registered with this id
+            return new ResponseEntity<>(UpdateMessage.idNotFound, HttpStatus.OK);
+        }
+    }
+
+    public ResponseEntity<?> deleteQuestion(Integer id) {
+        questionRepository.deleteById(id);
+        return new ResponseEntity<>(DeleteMessage.success, HttpStatus.OK);
+    }
+
+
 }

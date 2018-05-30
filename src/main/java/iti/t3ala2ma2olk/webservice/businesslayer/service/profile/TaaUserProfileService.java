@@ -11,7 +11,10 @@ import iti.t3ala2ma2olk.webservice.dto.profile.TaaUserProfile;
 import iti.t3ala2ma2olk.webservice.security.model.Person;
 import java.util.ArrayList;
 import java.util.List;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,6 +24,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class TaaUserProfileService {
 
+    
+        private static final ModelMapper modelMapper = new ModelMapper();
     @Autowired
     private TaaUserProfileRepository taaUserRepository;
 
@@ -37,17 +42,14 @@ public class TaaUserProfileService {
 
         return taaUserList;
     }
-//        public List<TaaUserProfile> getAllUserProfileWithBestProfermance() {
-//
-//        List<Person> persontList = new ArrayList<>();
-//        List<TaaUserProfile> taaUserList = new ArrayList<>();
-//
-//        taaUserRepository.findByTaaUser(null);
-//        
-//        persontList.stream()
-//                .filter(s -> (s.getTaaUser() != null))
-//                .forEach(taaUser->taaUserList.add(new TaaUserProfile(taaUser.getPersonId(),taaUser.getFirst())));
-//
-//        return taaUserList;
-//    }
+    public List<TaaUserProfile> getAllUserProfile(Pageable pageable) {
+        Page page = taaUserRepository.findAll(pageable);
+        List<Person> personList = page.getContent();
+        List<TaaUserProfile> taaUserProfileList = new ArrayList<>();
+
+        personList.stream()
+                .forEach(person -> taaUserProfileList.add(modelMapper.map(person, TaaUserProfile.class)));
+
+        return taaUserProfileList;
+    }
 }

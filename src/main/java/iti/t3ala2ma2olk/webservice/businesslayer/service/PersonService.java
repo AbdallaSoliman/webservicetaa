@@ -58,6 +58,7 @@ public class PersonService {
     }
 
     public ResponseEntity<?> addPerson(Person person) {
+        person.setPersonId(null);
         Person userExists = personRepository.findPersonByEmail(person.getEmail());
         if (userExists != null) {
             //  msg.setMsgBody("There is already a user registered with this email");

@@ -34,7 +34,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -223,22 +222,7 @@ public class Person implements Serializable {
     public void setAuthorities(List<Authority> authorities) {
         this.authorities = authorities;
     }
-// @JsonIgnore
-//    public Collection<Answers> getAnswersCollection() {
-//        return answersCollection;
-//    }
-//
-//    public void setAnswersCollection(Collection<Answers> answersCollection) {
-//        this.answersCollection = answersCollection;
-//    }
-// @JsonIgnore
-//    public Collection<Question> getQuestionCollection() {
-//        return questionCollection;
-//    }
-//
-//    public void setQuestionCollection(Collection<Question> questionCollection) {
-//        this.questionCollection = questionCollection;
-//    }
+
  @JsonIgnore
     public Collection<NotifiAnswers> getNotifiAnswersCollection() {
         return notifiAnswersCollection;

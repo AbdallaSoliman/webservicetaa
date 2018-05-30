@@ -7,10 +7,16 @@ package iti.t3ala2ma2olk.webservice.businesslayer.controller;
 
 import iti.t3ala2ma2olk.webservice.businesslayer.service.ReportService;
 import iti.t3ala2ma2olk.webservice.dal.entity.Report;
+import iti.t3ala2ma2olk.webservice.dal.entity.Report;
+import iti.t3ala2ma2olk.webservice.dto.ReportDTO;
+import iti.t3ala2ma2olk.webservice.dto.profile.LoginProfile;
+import iti.t3ala2ma2olk.webservice.dto.profile.util.DTO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,27 +27,33 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class ReportController {
-     @Autowired
+
+    @Autowired
     private ReportService reportService;
-    
-        @RequestMapping("/Report")       
-    public List<Report> getAllReport(){
-        return reportService.getAllReport();
+
+    @RequestMapping("/Report")
+    public List<Report> getAllReport(@PageableDefault(value=10, page=0) Pageable pageable) {
+        return reportService.getAllReport(pageable);
     }
-    @RequestMapping("/Report/{id}")  
-    public Report getReport(@PathVariable Integer id){
+
+    @RequestMapping("/Report/{id}")
+    public ResponseEntity<?> getReport(@PathVariable Integer id) {
         return reportService.getReport(id);
     }
-    @RequestMapping(method = RequestMethod.POST,value= "/Report") 
-    public void addReport(@RequestBody Report  report){
-        reportService.addReport(report);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/Report")
+    public ResponseEntity<?> addReport(@DTO(ReportDTO.class) Report report) {
+        return reportService.addReport(report);
     }
-        @RequestMapping(method = RequestMethod.PUT,value= "/Report") 
-    public void updateReport(@RequestBody Report  report){
-        reportService.updateReport(report);
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/Report")
+    public ResponseEntity<?> updateReport(@DTO(ReportDTO.class) Report report) {
+        return reportService.updateReport(report);
     }
-    @RequestMapping(method = RequestMethod.DELETE,value= "/Report/{id}")  
-    public void deleteReport(@PathVariable Integer id){
-         reportService.deleteReport(id);
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/Report/{id}")
+    public ResponseEntity<?> deleteReport(@PathVariable Integer id) {
+        return reportService.deleteReport(id);
     }
+
 }

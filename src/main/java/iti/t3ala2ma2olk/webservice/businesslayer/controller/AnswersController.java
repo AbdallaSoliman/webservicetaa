@@ -12,6 +12,8 @@ import iti.t3ala2ma2olk.webservice.dto.profile.LoginProfile;
 import iti.t3ala2ma2olk.webservice.dto.profile.util.DTO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +31,8 @@ public class AnswersController {
     private AnswersService answersService;
 
     @RequestMapping("/Answers")
-    public List<Answers> getAllAnswers() {
-        return answersService.getAllAnswers();
+    public List<Answers> getAllAnswers(@PageableDefault(value=10, page=0) Pageable pageable) {
+        return answersService.getAllAnswers(pageable);
     }
 
     @RequestMapping("/Answers/{id}")
@@ -52,5 +54,6 @@ public class AnswersController {
     public ResponseEntity<?> deleteAnswers(@PathVariable Integer id) {
         return answersService.deleteAnswers(id);
     }
+
 
 }

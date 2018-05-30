@@ -6,6 +6,8 @@
 package iti.t3ala2ma2olk.webservice.dal.repository;
 
 import iti.t3ala2ma2olk.webservice.dal.entity.TaaUser;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -13,5 +15,5 @@ import org.springframework.data.repository.CrudRepository;
  * @author abdalla
  */
 public interface TaaUserRepository extends  CrudRepository<TaaUser, Integer>{
-    
+        public Page<TaaUser> findAll(Pageable pageable);
 }

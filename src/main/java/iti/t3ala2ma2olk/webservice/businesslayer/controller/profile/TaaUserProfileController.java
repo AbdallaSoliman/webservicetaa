@@ -10,6 +10,7 @@ import iti.t3ala2ma2olk.webservice.businesslayer.service.profile.TaaUserProfileS
 import iti.t3ala2ma2olk.webservice.dto.profile.TaaUserProfile;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +25,7 @@ public class TaaUserProfileController {
     private TaaUserProfileService taaUserProfileService;
     
         @RequestMapping("/TaaUserProfile")       
-    public List<TaaUserProfile> getAllAdmin(){
-        return taaUserProfileService.getAllUserProfile();
+    public List<TaaUserProfile> getAllAdmin(Pageable pageable){
+        return taaUserProfileService.getAllUserProfile(pageable);
     }
 }

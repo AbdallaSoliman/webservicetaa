@@ -7,6 +7,7 @@ package iti.t3ala2ma2olk.webservice.businesslayer.controller;
 
 import iti.t3ala2ma2olk.webservice.businesslayer.service.MainCategoriesService;
 import iti.t3ala2ma2olk.webservice.dal.entity.MainCategories;
+import iti.t3ala2ma2olk.webservice.dal.entity.MainCategories;
 import iti.t3ala2ma2olk.webservice.dto.MainCategoriesDTO;
 import iti.t3ala2ma2olk.webservice.dto.profile.LoginProfile;
 import iti.t3ala2ma2olk.webservice.dto.profile.util.DTO;
@@ -31,8 +32,8 @@ public class MainCategoriesController {
     private MainCategoriesService mainCategoriesService;
 
     @RequestMapping("/MainCategories")
-    public List<MainCategories> getAllMainCategories(@PageableDefault(value=10, page=0) Pageable pageabl) {
-        return mainCategoriesService.getAllMainCategories(pageabl);
+    public List<MainCategories> getAllMainCategories(@PageableDefault(value=10, page=0) Pageable pageable) {
+        return mainCategoriesService.getAllMainCategories(pageable);
     }
 
     @RequestMapping("/MainCategories/{id}")

@@ -16,7 +16,7 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface MainCategoriesRepository extends  CrudRepository<MainCategories, Integer>{
 
-    public Page findAll(Pageable pageable);
+    public Page<MainCategories> findAll(Pageable pageable);
 
     public MainCategories findByCatName(String catName);
     

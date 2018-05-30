@@ -7,9 +7,10 @@ package iti.t3ala2ma2olk.webservice.dal.repository;
 
 
 import iti.t3ala2ma2olk.webservice.dal.entity.Question;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
+
 
 /**
  *
@@ -17,5 +18,5 @@ import org.springframework.stereotype.Service;
  */
 //@Repository
 public interface QuestionRepository extends  CrudRepository<Question, Integer>{
-    
+      public Page<Question> findAll(Pageable pageable);
 }

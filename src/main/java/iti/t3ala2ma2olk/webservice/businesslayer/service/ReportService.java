@@ -7,9 +7,23 @@ package iti.t3ala2ma2olk.webservice.businesslayer.service;
 
 import iti.t3ala2ma2olk.webservice.dal.entity.Report;
 import iti.t3ala2ma2olk.webservice.dal.repository.ReportRepository;
+import iti.t3ala2ma2olk.webservice.dto.ReportDTO;
+import iti.t3ala2ma2olk.webservice.businesslayer.msg.AddMessage;
+import iti.t3ala2ma2olk.webservice.businesslayer.msg.DeleteMessage;
+import iti.t3ala2ma2olk.webservice.businesslayer.msg.FindMessage;
+import iti.t3ala2ma2olk.webservice.businesslayer.msg.LoginMessage;
+import iti.t3ala2ma2olk.webservice.businesslayer.msg.RegistrationMessage;
+import iti.t3ala2ma2olk.webservice.businesslayer.msg.UpdateMessage;
 import java.util.ArrayList;
 import java.util.List;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,28 +32,53 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ReportService {
-        @Autowired
+
+    @Autowired
     private ReportRepository reportRepository;
-    
-     public List<Report> getAllReport(){
-            List<Report> myIntList= new ArrayList<>();
-            reportRepository.findAll().forEach(myIntList::add);
-        return myIntList;
-    }
-    public  Report getReport(Integer id){
-            return reportRepository.findById(id).orElse(null);
+
+    private static final ModelMapper modelMapper = new ModelMapper();
+
+    public List<Report> getAllReport(Pageable pageable) {
+        Page page = reportRepository.findAll(pageable);
+        return page.getContent();
     }
 
-    public void addReport(Report topic) {
-        reportRepository.save(topic);
-   }
+    public ResponseEntity<?> getReport(Integer id) {
 
-    public void updateReport(Report topic) {
-             reportRepository.save(topic);
+        if (modelMapper.map(reportRepository.findById(id).orElse(null), ReportDTO.class) != null) {
+            return new ResponseEntity<>(modelMapper.map(reportRepository.findById(id).orElse(null), ReportDTO.class), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(FindMessage.fail, HttpStatus.OK);
+        }
     }
 
-   public void deleteReport(Integer id) {
-         reportRepository.deleteById(id);
+    public ResponseEntity<?> addReport(Report report) {
+
+
+            report.setReportId(null);
+            //   Report  has been added successfully
+            reportRepository.save(report);
+            return new ResponseEntity<>(AddMessage.success, HttpStatus.OK);
+        
     }
-    
+
+    public ResponseEntity<?> updateReport(Report report) {
+        Report userExists = reportRepository.findById(report.getReportId()).orElse(null);
+        if (userExists != null) {
+
+                 reportRepository.save(report);
+                  return new ResponseEntity<>(UpdateMessage.success, HttpStatus.OK);
+   
+        } else {
+            // There is a updateReport  registered with this id
+            return new ResponseEntity<>(UpdateMessage.idNotFound, HttpStatus.OK);
+        }
+    }
+
+    public ResponseEntity<?> deleteReport(Integer id) {
+        reportRepository.deleteById(id);
+        return new ResponseEntity<>(DeleteMessage.success, HttpStatus.OK);
+    }
+
+
 }

@@ -31,8 +31,8 @@ public class AdminController {
     private AdminService adminService;
 
     @RequestMapping("/Admin")
-    public List<Admin> getAllAdmin(@PageableDefault(value=10, page=0) Pageable pageabl) {
-        return adminService.getAllAdmin(pageabl);
+    public List<Admin> getAllAdmin(@PageableDefault(value=10, page=0) Pageable pageable) {
+        return adminService.getAllAdmin(pageable);
     }
 
     @RequestMapping("/Admin/{id}")

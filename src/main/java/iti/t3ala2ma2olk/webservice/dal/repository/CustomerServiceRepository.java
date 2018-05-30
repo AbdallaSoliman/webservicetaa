@@ -6,6 +6,8 @@
 package iti.t3ala2ma2olk.webservice.dal.repository;
 
 import iti.t3ala2ma2olk.webservice.dal.entity.CustomerService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -13,5 +15,5 @@ import org.springframework.data.repository.CrudRepository;
  * @author abdalla
  */
 public interface CustomerServiceRepository extends  CrudRepository<CustomerService, Integer>{
-    
+     Page<CustomerService> findAll(Pageable pageable);
 }

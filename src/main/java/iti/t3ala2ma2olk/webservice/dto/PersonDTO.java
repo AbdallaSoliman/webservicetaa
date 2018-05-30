@@ -28,8 +28,10 @@ public class PersonDTO {
 
     public PersonDTO() {
     }
-     private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
+    
+    
     private Integer personId;
 
     private String image;
@@ -50,19 +52,19 @@ public class PersonDTO {
     private String username;
 
     private Date lastPasswordResetDate;
-    
- private List<Authority> authorities;
 
-   private Collection<Answers> answersCollection;
+    private List<Authority> authorities;
+
+    private Collection<Answers> answersCollection;
+
     private Collection<Question> questionCollection;
-    
- 
-    
+
     private Collection<NotifiAnswers> notifiAnswersCollection;
-    
-  
-   private Collection<Report> reportCollection;
-   private CustomerService customerService;
+
+    private Collection<Report> reportCollection;
+
+    private CustomerService customerService;
+
     private TaaUser taaUser;
-    
+
 }
