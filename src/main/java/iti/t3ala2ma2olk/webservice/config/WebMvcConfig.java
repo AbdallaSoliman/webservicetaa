@@ -20,11 +20,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     private final ApplicationContext applicationContext;
     private final EntityManager entityManager;
 
-        @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder;
-    }
     @Autowired
     public WebMvcConfig(ApplicationContext applicationContext, EntityManager entityManager) {
         this.applicationContext = applicationContext;
@@ -38,5 +33,9 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         argumentResolvers.add(new DTOModelMapper(objectMapper, entityManager));
     }
 
-
+   // @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        return bCryptPasswordEncoder;
+    }
 }
