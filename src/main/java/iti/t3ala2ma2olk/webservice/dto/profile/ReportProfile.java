@@ -11,17 +11,11 @@ package iti.t3ala2ma2olk.webservice.dto.profile;
  */
 public class ReportProfile {
     Integer id;
-    String Title;
+    String msg;
 
     public ReportProfile() {
     }
-
-    public ReportProfile(Integer id, String Title) {
-        this.id = id;
-        this.Title = Title;
-    }
-
-    
+  
     
     
     public Integer getId() {
@@ -32,12 +26,18 @@ public class ReportProfile {
         this.id = id;
     }
 
-    public String getTitle() {
-        return Title;
+    public ReportProfile(Integer id, String msg) {
+        this.id = id;
+        this.msg = msg;
     }
 
-    public void setTitle(String Title) {
-        this.Title = Title;
+    public String getMsg() {
+        return msg;
     }
-    
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+
 }
