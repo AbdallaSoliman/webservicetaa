@@ -34,8 +34,6 @@ import org.springframework.stereotype.Service;
 public class TaaUserService {
 
     /* using to encode Password to be secur*/
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private TaaUserRepository taaUserRepository;

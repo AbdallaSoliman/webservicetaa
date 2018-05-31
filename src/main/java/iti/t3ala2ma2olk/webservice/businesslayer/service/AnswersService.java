@@ -33,10 +33,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class AnswersService {
 
-    /* using to encode Password to be secur*/
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
     @Autowired
     private AnswersRepository answersRepository;
     
