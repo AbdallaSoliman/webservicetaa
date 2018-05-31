@@ -33,7 +33,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         argumentResolvers.add(new DTOModelMapper(objectMapper, entityManager));
     }
 
-   // @Bean
+    @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         return bCryptPasswordEncoder;

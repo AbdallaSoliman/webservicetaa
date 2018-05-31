@@ -24,6 +24,8 @@ public interface CategoriesRepository extends  CrudRepository<SubCat, Integer>{
     @Query("FROM iti.t3ala2ma2olk.webservice.dal.entity.SubCat p "
             + "where p.mainCategoriesId = :mainCategoriesId")
     public Page<Object> findDistinctBySubCatNameAndMainCategoriesId(@Param("mainCategoriesId")MainCategories mainCategoriesId ,Pageable pageable);
+    
+    public Page<SubCat> findBySubCatName(String subCatName ,Pageable pageable);
 
 
 }

@@ -7,6 +7,7 @@ package iti.t3ala2ma2olk.webservice.businesslayer.controller.special;
 
 import iti.t3ala2ma2olk.webservice.businesslayer.service.special.CategoriesService;
 import iti.t3ala2ma2olk.webservice.dto.special.CategoriesDTO;
+import iti.t3ala2ma2olk.webservice.dto.special.DescriptionDTO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -29,4 +30,8 @@ public class CategoriesController {
     public List<CategoriesDTO> getAllMainCategories(@PageableDefault(value=10, page=0) Pageable pageable,@PathVariable Integer id) {
         return categoriesService.getAllMainCategories(pageable,id);
     }
+    @RequestMapping("/CategoriesByName/{SubCatName}")
+      public List<DescriptionDTO> getAllDescriptionDTOBySubCatName(@PageableDefault(value=10, page=0) Pageable pageable,@PathVariable String SubCatName) {
+             return categoriesService.getAllDescriptionDTOBySubCatName(pageable,  SubCatName);
+      }
 }

@@ -10,6 +10,7 @@ import iti.t3ala2ma2olk.webservice.dal.entity.SubCat;
 import iti.t3ala2ma2olk.webservice.dal.repository.MainCategoriesRepository;
 import iti.t3ala2ma2olk.webservice.dal.repository.special.CategoriesRepository;
 import iti.t3ala2ma2olk.webservice.dto.special.CategoriesDTO;
+import iti.t3ala2ma2olk.webservice.dto.special.DescriptionDTO;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -54,4 +55,18 @@ public class CategoriesService {
  
     }
     //.filter(predicate->predicate.getMainCategoriesId().getMainCategoriesId().equals(id))
+        public List<DescriptionDTO> getAllDescriptionDTOBySubCatName(Pageable pageable , String SubCatName) {
+    
+        Page page = categoriesRepository.findBySubCatName(
+                SubCatName,pageable);
+        List<SubCat> subCategoriesList = page.getContent();
+        List<DescriptionDTO> categoriesList = new ArrayList<>();
+        subCategoriesList.stream()
+                .forEach(subCat -> categoriesList.add(modelMapper.map(subCat, DescriptionDTO.class)));
+
+
+        return categoriesList;
+ 
+    }
+    
 }
