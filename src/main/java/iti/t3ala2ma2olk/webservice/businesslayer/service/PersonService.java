@@ -39,7 +39,7 @@ public class PersonService {
     private static final ModelMapper modelMapper = new ModelMapper();
 
     @Autowired
-    @Qualifier("BCryptPasswordEncoder")
+    //@Qualifier("BCryptPasswordEncoder")
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
