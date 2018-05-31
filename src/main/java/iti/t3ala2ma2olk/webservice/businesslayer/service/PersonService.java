@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -38,6 +39,7 @@ public class PersonService {
     private static final ModelMapper modelMapper = new ModelMapper();
 
     @Autowired
+    @Qualifier("BCryptPasswordEncoder")
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
