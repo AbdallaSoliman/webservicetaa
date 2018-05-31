@@ -46,7 +46,6 @@ public class CategoriesService {
                 mainCategoriesRepository.findById(id).orElse(null),pageable);
         List<SubCat> subCategoriesList = page.getContent();
         List<CategoriesDTO> categoriesList = new ArrayList<>();
-        System.out.println("test 5_30"+subCategoriesList.get(0).getSubCatName());
         subCategoriesList.stream().filter(distinctByKey(SubCat::getSubCatName))
                 .forEach(categories -> categoriesList.add(modelMapper.map(categories, CategoriesDTO.class)));
 
