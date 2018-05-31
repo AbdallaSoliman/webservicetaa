@@ -11,18 +11,14 @@ package iti.t3ala2ma2olk.webservice.dto.profile;
  */
 public class TaaUserProfile {
     Integer id;
-    String name;
+    String username;
 
     public TaaUserProfile() {
     }
 
     
     
-    public TaaUserProfile(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
+ 
     
     
     public Integer getId() {
@@ -33,12 +29,19 @@ public class TaaUserProfile {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
+
+    public TaaUserProfile(Integer id, String username) {
+        this.id = id;
+        this.username = username;
+    }
+
+
     
 }
