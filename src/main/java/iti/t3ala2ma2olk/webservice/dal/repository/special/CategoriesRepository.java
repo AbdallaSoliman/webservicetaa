@@ -20,9 +20,10 @@ import org.springframework.data.repository.query.Param;
  * @author abdalla
  */
 public interface CategoriesRepository extends  CrudRepository<SubCat, Integer>{
-  //  @Query("select subCatId  distinct subCatName  from  iti.t3ala2ma2olk.webservice.dal.entity.subCat u where u.mainCategoriesId = :mainCategoriesId")
- //  @Query(value = "select * from internal_uddi where urn like %?1% or contact like %?1%",
-        //   nativeQuery = true)
-    @Query("SELECT new iti.t3ala2ma2olk.webservice.dto.special.CategoriesDTO (p.subCatName,p.subCatId ) FROM iti.t3ala2ma2olk.webservice.dal.entity.SubCat p ")
-     public Page<SubCat> findAll(@Param("mainCategoriesId")Integer mainCategoriesId ,Pageable pageable);
+    /* work without  DISTINCT*/
+    @Query("FROM iti.t3ala2ma2olk.webservice.dal.entity.SubCat p "
+            + "where p.mainCategoriesId = :mainCategoriesId")
+    public Page<Object> findDistinctBySubCatNameAndMainCategoriesId(@Param("mainCategoriesId")MainCategories mainCategoriesId ,Pageable pageable);
+
+
 }

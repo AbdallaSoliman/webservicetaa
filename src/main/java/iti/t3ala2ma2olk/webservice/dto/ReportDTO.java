@@ -26,6 +26,8 @@ public class ReportDTO {
     private Integer reportId;
 
     private String msg;
+    
+    private String title;
 
     private String type;
 

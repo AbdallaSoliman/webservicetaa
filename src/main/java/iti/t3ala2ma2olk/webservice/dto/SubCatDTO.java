@@ -8,11 +8,6 @@ package iti.t3ala2ma2olk.webservice.dto;
 import iti.t3ala2ma2olk.webservice.dal.entity.MainCategories;
 import iti.t3ala2ma2olk.webservice.dal.entity.Question;
 import java.util.Collection;
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -38,4 +33,6 @@ public class SubCatDTO {
     private Collection<Question> questionCollection;
 
     private MainCategories mainCategoriesId;
+    
+    private String imgUrl;
 }

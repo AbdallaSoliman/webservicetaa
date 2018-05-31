@@ -63,7 +63,10 @@ public class Report implements Serializable {
     @JoinColumn(name = "person_id", referencedColumnName = "person_id")
     @ManyToOne
     private Person personId;
-
+    @Size(max = 200)
+    @Column(name = "title")
+    private String title;
+    
     public Report() {
     }
 
@@ -151,5 +154,15 @@ public class Report implements Serializable {
     public String toString() {
         return "iti.t3ala2ma2olk.webservice.dal.entity.Report[ reportId=" + reportId + " ]";
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+
     
 }

@@ -56,6 +56,9 @@ public class SubCat implements Serializable {
     @JoinColumn(name = "main_categories_id", referencedColumnName = "main_categories_id")
     @ManyToOne
     private MainCategories mainCategoriesId;
+        @Size(max = 1000)
+    @Column(name = "imgUrl")
+    private String imgUrl;
 
     public SubCat() {
     }
@@ -128,6 +131,14 @@ public class SubCat implements Serializable {
     @Override
     public String toString() {
         return "iti.t3ala2ma2olk.webservice.dal.entity.SubCat[ subCatId=" + subCatId + " ]";
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
     
 }

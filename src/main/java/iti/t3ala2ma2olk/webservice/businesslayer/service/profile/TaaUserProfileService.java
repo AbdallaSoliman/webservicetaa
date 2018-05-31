@@ -47,7 +47,7 @@ public class TaaUserProfileService {
         List<Person> personList = page.getContent();
         List<TaaUserProfile> taaUserProfileList = new ArrayList<>();
 
-        personList.stream()
+        personList.stream().filter(predicate->predicate.getTaaUser()!=null)
                 .forEach(person -> taaUserProfileList.add(modelMapper.map(person, TaaUserProfile.class)));
 
         return taaUserProfileList;
