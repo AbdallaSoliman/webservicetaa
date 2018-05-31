@@ -34,8 +34,8 @@ public class AdminService {
 
     private static final ModelMapper modelMapper = new ModelMapper();
     /* using to encode Password to be secur*/
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+//    @Autowired
+//    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private AdminRepository adminRepository;
@@ -61,7 +61,8 @@ public class AdminService {
             return new ResponseEntity<>(RegistrationMessage.fail, HttpStatus.OK);
         } else {
             admin.setAdminId(null);
-            admin.setPassword(bCryptPasswordEncoder.encode(admin.getPassword()));
+           // admin.setPassword(bCryptPasswordEncoder.encode(admin.getPassword()));
+            admin.setPassword(admin.getPassword());
             //   User has been registered successfully
             adminRepository.save(admin);
             return new ResponseEntity<>(AddMessage.success, HttpStatus.OK);
@@ -74,7 +75,8 @@ public class AdminService {
             if (((adminRepository.findByUsername(admin.getUsername()) == null))
                     || ((userExists.getUsername().equals(admin.getUsername())))) {
                 if (!userExists.getPassword().equals(admin.getPassword())) {
-                    admin.setPassword(bCryptPasswordEncoder.encode(admin.getPassword()));
+                //    admin.setPassword(bCryptPasswordEncoder.encode(admin.getPassword()));
+                     admin.setPassword(admin.getPassword());
                 }
                 //   User has been updated successfully 
                 adminRepository.save(admin);
