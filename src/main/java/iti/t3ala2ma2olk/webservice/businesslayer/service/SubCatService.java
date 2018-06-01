@@ -38,6 +38,13 @@ public class SubCatService {
 
     private static final ModelMapper modelMapper = new ModelMapper();
 
+       public SubCatDTO getSubCatWithId(Integer id) {
+
+            return modelMapper.map(subCatRepository.findById(id).orElse(null), SubCatDTO.class);
+        
+    }
+    
+    
     public List<SubCat> getAllSubCat(Pageable pageable) {
         Page page = subCatRepository.findAll(pageable);
         return page.getContent();
