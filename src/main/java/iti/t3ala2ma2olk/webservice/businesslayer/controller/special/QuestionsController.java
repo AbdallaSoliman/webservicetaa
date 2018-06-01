@@ -29,7 +29,7 @@ public class QuestionsController {
     @Autowired
     private SubCatService subCatService;
     
-    @RequestMapping("/questionWithsubCat/{id}")
+    @RequestMapping("/QuestionWithSubCat/{id}")
     public QuestionWithSubCatDTO  questionWithsubCat(@PathVariable Integer id) {
         QuestionWithSubCatDTO questionWithSubCatDTO=new QuestionWithSubCatDTO();
          List <QuestionCustomDTO> questions=new ArrayList<QuestionCustomDTO>();

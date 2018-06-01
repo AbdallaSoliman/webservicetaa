@@ -15,5 +15,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DescriptionDTO {
+    
+    private Integer subCatId;
+       
+    private String subCatName;
+
     private String description;
+  
+    private String imgUrl;
 }
