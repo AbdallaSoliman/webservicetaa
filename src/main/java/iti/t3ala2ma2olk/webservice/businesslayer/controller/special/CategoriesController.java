@@ -48,7 +48,7 @@ public class CategoriesController {
       public List<DescriptionDTO> getAllDescriptionDTOBySubCatName(@PageableDefault(value=10, page=0) Pageable pageable,@PathVariable String SubCatName) {
              return categoriesService.getAllDescriptionDTOBySubCatName(pageable,  SubCatName);
       }
-          @RequestMapping("/MainCategoryWithSubs")
+@RequestMapping("/MainCategoryWithSubs")
     public List<MainCatDTOSpe> getAllMainCategoriesAndQuestions(@PageableDefault(value=10, page=0) Pageable pageable) {
         List<MainCategories> catList=mainCategoriesService.getAllMainCategories(pageable);
        
@@ -61,21 +61,19 @@ public class CategoriesController {
                      if(!temp1.getSubCatName().equals("notValue")){
                          MainCatDTOSpe mainTemp=new MainCatDTOSpe();
                          mainTemp.setCatName(temp1.getSubCatName());
+                         mainTemp.setImgUrl(temp1.getImgUrl());
                          List <SubCatDTOSpe> tempSubs=new ArrayList <SubCatDTOSpe>();
                          SubCatDTOSpe subTemp=new SubCatDTOSpe();
                          subTemp.setCatId(temp1.getSubCatId());
                          subTemp.setCatName(temp1.getDescription());
-                         subTemp.setImgUrl(temp1.getImgUrl());
                          subTemp.setNumberOfQues(getNumberOfQuestion(temp1.getSubCatId()));
                          tempSubs.add(subTemp);
-                         
                          
                          catList.get(loop).getSubCatCollection().forEach((temp2) -> {
                              if(temp1.getSubCatName().equals(temp2.getSubCatName()) && temp1 != temp2 ){
                                 SubCatDTOSpe subTemp2=new SubCatDTOSpe();
                                 subTemp2.setCatId(temp2.getSubCatId());
                                 subTemp2.setCatName(temp2.getDescription());
-                                subTemp2.setImgUrl(temp2.getImgUrl());
                                 subTemp2.setNumberOfQues(getNumberOfQuestion(temp2.getSubCatId()));
                                 tempSubs.add(subTemp2);
                                  
@@ -97,8 +95,9 @@ public class CategoriesController {
          
          
         return catDTOList;
-    }
-        public int getNumberOfQuestion(int catID){
+    }     
+    
+    public int getNumberOfQuestion(int catID){
          SubCatDTO  subCat=subCatService.getSubCatWithId(catID);
          return subCat.getQuestionCollection().size();
     }

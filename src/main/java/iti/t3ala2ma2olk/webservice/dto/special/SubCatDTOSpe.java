@@ -26,7 +26,7 @@ public class SubCatDTOSpe {
 
     private String CatName;
 
-    private String imgUrl;
+   // private String imgUrl;
     
     private int numberOfQues;
     

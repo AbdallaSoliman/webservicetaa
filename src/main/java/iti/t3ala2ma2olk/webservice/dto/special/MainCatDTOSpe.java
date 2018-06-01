@@ -19,7 +19,7 @@ import lombok.Setter;
 public class MainCatDTOSpe {
     private String CatName;
 
-  //  private String imgUrl;
+    private String imgUrl;
     
     private int numberOfQues;
     
