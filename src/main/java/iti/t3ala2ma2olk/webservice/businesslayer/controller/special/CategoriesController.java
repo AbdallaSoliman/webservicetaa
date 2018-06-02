@@ -19,8 +19,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -41,13 +43,21 @@ public class CategoriesController {
     private SubCatService subCatService;
     
         @RequestMapping("/Categories/{id}")
-    public List<CategoriesDTO> getAllMainCategories(@PageableDefault(value=10, page=0) Pageable pageable,@PathVariable Integer id) {
+    public List<CategoriesDTO> getAllMainCategories(@PageableDefault(value=100, page=0) Pageable pageable,@PathVariable Integer id) {
         return categoriesService.getAllMainCategories(pageable,id);
     }
     @RequestMapping("/CategoriesByName/{SubCatName}")
       public List<DescriptionDTO> getAllDescriptionDTOBySubCatName(@PageableDefault(value=10, page=0) Pageable pageable,@PathVariable String SubCatName) {
              return categoriesService.getAllDescriptionDTOBySubCatName(pageable,  SubCatName);
       }
+      
+      @RequestMapping(method = RequestMethod.DELETE,value ="/CategoriesByName/{SubCatName}")
+      public ResponseEntity<?> deleteAllDescriptionDTOBySubCatName(@PathVariable String SubCatName) {
+             return categoriesService.deleteAllDescriptionDTOBySubCatName(SubCatName);
+      } 
+      
+      
+      /* ali */
 @RequestMapping("/MainCategoryWithSubs")
     public List<MainCatDTOSpe> getAllMainCategoriesAndQuestions(@PageableDefault(value=10, page=0) Pageable pageable) {
         List<MainCategories> catList=mainCategoriesService.getAllMainCategories(pageable);
@@ -101,5 +111,5 @@ public class CategoriesController {
          SubCatDTO  subCat=subCatService.getSubCatWithId(catID);
          return subCat.getQuestionCollection().size();
     }
-
+/* ali */
 }
