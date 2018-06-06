@@ -85,9 +85,15 @@ public class PersonService {
         if (userExists != null) {
 
             if (((personRepository.findPersonByEmail(person.getEmail()) == null)
-                    && (personRepository.findByUsername(person.getUsername()) == null))
+                    && (personRepository.findByUsername(person.getUsername()) == null))//change username & email
                     || ((userExists.getEmail().equals(person.getEmail()))
-                    && (userExists.getUsername().equals(person.getUsername())))) {
+                    && (userExists.getUsername().equals(person.getUsername())))//change other data
+                    ||((personRepository.findPersonByEmail(person.getEmail()) == null)
+                    &&(userExists.getUsername().equals(person.getUsername())))//change email
+                    ||((personRepository.findByUsername(person.getUsername()) == null)
+                    &&(userExists.getEmail().equals(person.getEmail()))))//change username
+            {
+                
                 if (!userExists.getPassword().equals(person.getPassword())) {
                     person.setPassword(bCryptPasswordEncoder.encode(person.getPassword()));
                 }
@@ -96,13 +102,19 @@ public class PersonService {
                   return new ResponseEntity<>(UpdateMessage.success, HttpStatus.OK);
           
 
-            }
-        } else if(personRepository.findPersonByEmail(person.getEmail()) != null){
+            } else if(personRepository.findPersonByEmail(person.getEmail()) != null
+                    &&(userExists.getUsername().equals(person.getUsername()))){
             //   msg.setMsgBody("There is a user registered with this email or user name");
              return new ResponseEntity<>(UpdateMessage.repeatedEmail, HttpStatus.OK);
 
-        }
-       return new ResponseEntity<>(UpdateMessage.repeatedUsername, HttpStatus.OK);
+        } else{
+                return new ResponseEntity<>(UpdateMessage.repeatedUsername, HttpStatus.OK);
+            }
+            
+            
+            
+        } 
+       return new ResponseEntity<>(UpdateMessage.fail, HttpStatus.OK);
     }
 
     public ResponseEntity<?> deletePerson(Integer id) {
