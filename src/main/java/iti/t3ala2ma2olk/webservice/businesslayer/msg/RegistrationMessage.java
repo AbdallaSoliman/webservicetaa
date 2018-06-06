@@ -14,11 +14,11 @@ import javax.persistence.Entity;
 
 public class RegistrationMessage {
     
-   public static String success="Registration Done successfully";
-   public static String fail="Registration fail";
-       public static String repeatedUsername = "Registration fail , repeated Username";
-    public static String repeatedEmail = "Registration fail , repeated Email";
-    public static String idNotFound = "Registration fail ,this user does not exist";
-    public static String uniqueField = "Registration fail ,please chose unique value";
+   public static MessageDTO success =new MessageDTO( "Registration Done successfully");
+   public static MessageDTO fail=new MessageDTO("Registration fail");
+       public static MessageDTO repeatedUsername =new MessageDTO( "Registration fail , repeated Username");
+    public static MessageDTO repeatedEmail =new MessageDTO( "Registration fail , repeated Email");
+    public static MessageDTO idNotFound =new MessageDTO( "Registration fail ,this user does not exist");
+    public static MessageDTO uniqueField =new MessageDTO( "Registration fail ,please chose unique value");
     
 }

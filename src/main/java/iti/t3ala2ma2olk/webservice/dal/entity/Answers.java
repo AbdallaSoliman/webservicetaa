@@ -77,8 +77,8 @@ public class Answers implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date answersDate;
     
-//    @ManyToMany(mappedBy = "answersCollection")
-//    private Collection<Person> personCollection;
+    @ManyToMany(mappedBy = "answersCollection")
+    private Collection<Person> personCollection;
     
     @OneToMany(mappedBy = "answersId")
     private Collection<NotifiAnswers> notifiAnswersCollection;
@@ -168,14 +168,14 @@ public class Answers implements Serializable {
         this.answersDate = answersDate;
     }
 
-//    @XmlTransient
-//    public Collection<Person> getPersonCollection() {
-//        return personCollection;
-//    }
-//
-//    public void setPersonCollection(Collection<Person> personCollection) {
-//        this.personCollection = personCollection;
-//    }
+  
+    public Collection<Person> getPersonCollection() {
+        return personCollection;
+    }
+
+    public void setPersonCollection(Collection<Person> personCollection) {
+        this.personCollection = personCollection;
+    }
  @JsonIgnore
     @XmlTransient
     public Collection<NotifiAnswers> getNotifiAnswersCollection() {

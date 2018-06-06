@@ -44,6 +44,8 @@ public class AnswersDTO {
     private Integer notifi;
     private Date answersDate;
        
+     private Collection<Person> personCollection;
+    
  //@JsonIgnore
     private Collection<NotifiAnswers> notifiAnswersCollection;
 // @JsonIgnore

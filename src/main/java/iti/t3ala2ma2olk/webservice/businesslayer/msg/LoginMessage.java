@@ -10,6 +10,6 @@ package iti.t3ala2ma2olk.webservice.businesslayer.msg;
  * @author abdalla
  */
 public class LoginMessage {
-   public static String success="Login Done successfully";
-   public static String fail="Login fail";
+   public static MessageDTO success =new MessageDTO( "Login Done successfully");
+   public static MessageDTO fail=new MessageDTO("Login fail");
 }

@@ -11,6 +11,6 @@ package iti.t3ala2ma2olk.webservice.businesslayer.msg;
  */
 public class AddMessage {
 
-    public static String success = "Add Done successfully";
-    public static String fail = "Add fail";
+    public static MessageDTO success =new MessageDTO( "Add Done successfully");
+    public static MessageDTO fail  =new MessageDTO( "Add fail");
 }

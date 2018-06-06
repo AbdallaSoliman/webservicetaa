@@ -5,11 +5,20 @@
  */
 package iti.t3ala2ma2olk.webservice.businesslayer.msg;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  *
  * @author abdalla
  */
-public class FindMessage {
-    public static MessageDTO success =new MessageDTO( "Find Done successfully");
-    public static MessageDTO fail =new MessageDTO(  "Find fail");
+@Setter
+@Getter
+public class MessageDTO {
+ final private String result;
+
+    public MessageDTO(String result) {
+        this.result = result;
+    }
+  
 }

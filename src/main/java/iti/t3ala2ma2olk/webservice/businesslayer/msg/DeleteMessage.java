@@ -11,6 +11,6 @@ package iti.t3ala2ma2olk.webservice.businesslayer.msg;
  */
 public class DeleteMessage {
 
-    public static String success = "Delete Done successfully";
-    public static String fail = "Delete fail";
+    public static MessageDTO success =new MessageDTO( "Delete Done successfully");
+    public static MessageDTO fail =new MessageDTO( "Delete fail");
 }

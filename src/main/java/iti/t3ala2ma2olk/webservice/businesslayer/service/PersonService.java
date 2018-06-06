@@ -73,8 +73,8 @@ public class PersonService {
             authorityLsit.add(new Authority(1, AuthorityName.ROLE_USER));
             person.setAuthorities(authorityLsit);
             //   msg.setMsgBody("User has been registered successfully");
-            personRepository.save(person);
-            return new ResponseEntity<>(RegistrationMessage.success, HttpStatus.OK);
+            return new ResponseEntity<>(personRepository.save(person), HttpStatus.OK);
+           // return new ResponseEntity<>(RegistrationMessage.success, HttpStatus.OK);
         }
 
     }
