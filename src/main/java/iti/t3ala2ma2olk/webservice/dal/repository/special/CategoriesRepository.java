@@ -9,6 +9,7 @@ import iti.t3ala2ma2olk.webservice.dal.entity.MainCategories;
 import iti.t3ala2ma2olk.webservice.dal.entity.SubCat;
 import iti.t3ala2ma2olk.webservice.dto.profile.util.DTO;
 import iti.t3ala2ma2olk.webservice.dto.special.CategoriesDTO;
+import javax.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -27,5 +28,6 @@ public interface CategoriesRepository extends  CrudRepository<SubCat, Integer>{
     
     public Page<SubCat> findBySubCatName(String subCatName ,Pageable pageable);
 
-
+   @Transactional
+    Long deleteBySubCatName(String subCatName);
 }
