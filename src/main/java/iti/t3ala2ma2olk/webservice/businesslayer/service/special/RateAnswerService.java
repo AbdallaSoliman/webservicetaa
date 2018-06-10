@@ -47,7 +47,7 @@ public class RateAnswerService {
             if (answers.getRate() != null) {
                 answers.setRate(answers.getRate() + 1);
             } else {
-                answers.setRate(0);
+                answers.setRate(1);
             }
 //             answers.getPersonCollection().add(person);
             Collection<Answers> answersList = person.getAnswersCollection();
@@ -68,7 +68,7 @@ public class RateAnswerService {
             if (answers.getRate() != null) {
                 answers.setRate(answers.getRate() - 1);
             } else {
-                answers.setRate(0);
+                answers.setRate(-1);
             }
 //             answers.getPersonCollection().add(person);
             Collection<Answers> answersList = person.getAnswersCollection();
