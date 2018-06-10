@@ -12,5 +12,5 @@ import org.springframework.http.ResponseEntity;
  * @author abdalla
  */
 public abstract  class NotificationParent <T>{
-    public abstract  ResponseEntity<?> addNewNotification(T beanDTO);
+    public abstract  ResponseEntity<?> addNewNotification(T bean);
 }

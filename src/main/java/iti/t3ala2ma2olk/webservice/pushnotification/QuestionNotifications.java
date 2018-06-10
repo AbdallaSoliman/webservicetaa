@@ -14,43 +14,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author abdalla
  */
+@Service
 public class QuestionNotifications  extends NotificationParent<Question>{
 
 
     	@Autowired
 	AndroidPushNotificationsService androidPushNotificationsService;
-        private static QuestionNotifications instance;
-    private QuestionNotifications() {
-    }
-                public static QuestionNotifications getInstanceUsingDoubleLocking(){
-    if(instance == null){
-        synchronized (QuestionNotifications.class) {
-            if(instance == null){
-                instance = new QuestionNotifications();
-            }
-        }
-    }
-    return instance;
-}
-        
+//        private static QuestionNotifications instance;
+//    private QuestionNotifications() {
+//    }
+//                public static QuestionNotifications getInstanceUsingDoubleLocking(){
+//    if(instance == null){
+//        synchronized (QuestionNotifications.class) {
+//            if(instance == null){
+//                instance = new QuestionNotifications();
+//            }
+//        }
+//    }
+//    return instance;
+//}
+//        
 
     
-    public ResponseEntity<?> addNewNotification(Question questionDTO){
+    public ResponseEntity<?> addNewNotification(Question question){
         JSONObject body = new JSONObject();
-		body.put("to", "/topics/" +"QuestionNotifications"+ questionDTO.getQuestionId());
+		body.put("to", "/topics/" +"QuestionNotifications"+ question.getQuestionId());
 		body.put("priority", "high");
  
 		JSONObject notification = new JSONObject();
-		notification.put("title", questionDTO.getTitle());
-		notification.put("body", questionDTO.getBody());
+		notification.put("title", question.getTitle());
+		notification.put("body", question.getBody());
 		
 		JSONObject data = new JSONObject();
-		data.put("getPersonId", questionDTO.getPersonId().getPersonId());
+		data.put("getPersonId", question.getPersonId().getPersonId());
 //		data.put("Key-2", "JSA Data 2");
  
 		body.put("notification", notification);

@@ -10,6 +10,7 @@ import iti.t3ala2ma2olk.webservice.dto.profile.ReportProfile;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +25,7 @@ public class ReportProfileContoller {
     private ReportProfileService reportProfileService;
     
         @RequestMapping("/ReportProfile")       
-    public List<ReportProfile> getAllAdmin(Pageable pageable){
+    public List<ReportProfile> getAllAdmin(@PageableDefault(value=1000, page=0) Pageable pageable){
         return reportProfileService.getAllUserProfile( pageable);
     }
 }

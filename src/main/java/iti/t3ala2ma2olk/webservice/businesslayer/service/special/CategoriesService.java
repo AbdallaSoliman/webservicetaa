@@ -67,7 +67,7 @@ public class CategoriesService {
                 SubCatName, pageable);
         List<SubCat> subCategoriesList = page.getContent();
         List<DescriptionDTO> categoriesList = new ArrayList<>();
-        subCategoriesList.stream().filter(subCat->subCat.getDescription()!=null)
+        subCategoriesList.stream().filter(subCat->!subCat.getDescription().equals("DEFAULT"))
                 .forEach(subCat -> categoriesList.add(modelMapper.map(subCat, DescriptionDTO.class)));
 
         return categoriesList;

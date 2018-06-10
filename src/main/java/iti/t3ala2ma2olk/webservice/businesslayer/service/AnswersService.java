@@ -5,7 +5,6 @@
  */
 package iti.t3ala2ma2olk.webservice.businesslayer.service;
 
-
 import iti.t3ala2ma2olk.webservice.dal.repository.AnswersRepository;
 import iti.t3ala2ma2olk.webservice.dto.AnswersDTO;
 import iti.t3ala2ma2olk.webservice.businesslayer.msg.AddMessage;
@@ -19,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.modelmapper.ModelMapper;
 import iti.t3ala2ma2olk.webservice.businesslayer.factory.ModelMapperFactory;
+import iti.t3ala2ma2olk.webservice.pushnotification.AnswersNotifications;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,9 +36,12 @@ import org.springframework.stereotype.Service;
 public class AnswersService {
 
     @Autowired
+    private AnswersNotifications answersNotifications;
+
+    @Autowired
     private AnswersRepository answersRepository;
-    
-       private static final ModelMapper modelMapper = ModelMapperFactory.getModelMapper();
+
+    private static final ModelMapper modelMapper = ModelMapperFactory.getModelMapper();
 
     public List<Answers> getAllAnswers(Pageable pageable) {
         Page page = answersRepository.findAll(pageable);
@@ -56,26 +59,28 @@ public class AnswersService {
 
     public ResponseEntity<?> addAnswers(Answers answers) {
 
-            answers.setAnswersId(null);
-            //   User has been added successfully
-            answersRepository.save(answers);
-         //   NotificationFactory.getNotification("Question").addNewNotification(answers);
-            return new ResponseEntity<>(AddMessage.success, HttpStatus.OK);
-       
+        answers.setAnswersId(null);
+        //   User has been added successfully
+        answersRepository.save(answers);
+//            NotificationFactory.getNotification("Answers").addNewNotification(answers);
+        answersNotifications.addNewNotification(answers);
+        return new ResponseEntity<>(AddMessage.success, HttpStatus.OK);
+
     }
 
     public ResponseEntity<?> updateAnswers(Answers answers) {
         Answers userExists = answersRepository.findById(answers.getAnswersId()).orElse(null);
         if (userExists != null) {
-                //   answers has been updated successfully 
-                 answersRepository.save(answers);
-//                NotificationFactory.getNotification("Question").addNewNotification(answers);
-                  return new ResponseEntity<>(UpdateMessage.success, HttpStatus.OK);
-        } 
-    
-          return new ResponseEntity<>(UpdateMessage.fail, HttpStatus.OK);
+            //   answers has been updated successfully 
+            answersRepository.save(answers);
+//                NotificationFactory.getNotification("Answers").addNewNotification(answers);
+            answersNotifications.addNewNotification(answers);
+            return new ResponseEntity<>(UpdateMessage.success, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(UpdateMessage.fail, HttpStatus.OK);
     }
-    
+
     public ResponseEntity<?> deleteAnswers(Integer id) {
         answersRepository.deleteById(id);
         return new ResponseEntity<>(DeleteMessage.success, HttpStatus.OK);

@@ -8,10 +8,12 @@ package iti.t3ala2ma2olk.webservice.pushnotification;
 import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 import org.springframework.beans.factory.annotation.Value;
+
  
 import org.springframework.http.HttpEntity;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.scheduling.annotation.Async;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 /**
@@ -26,7 +28,7 @@ public class AndroidPushNotificationsService {
          
          
 	private static final String FIREBASE_API_URL = "https://fcm.googleapis.com/fcm/send";
-	
+
 	@Async
 	public CompletableFuture<String> send(HttpEntity<String> entity) {
  

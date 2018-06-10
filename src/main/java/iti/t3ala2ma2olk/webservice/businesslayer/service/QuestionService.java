@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.modelmapper.ModelMapper;
 import iti.t3ala2ma2olk.webservice.businesslayer.factory.ModelMapperFactory;
+import iti.t3ala2ma2olk.webservice.pushnotification.QuestionNotifications;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,6 +36,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class QuestionService {
 
+        @Autowired
+    private QuestionNotifications questionNotifications;
+    
     @Autowired
     private QuestionRepository questionRepository;
 
@@ -60,7 +64,8 @@ public class QuestionService {
             question.setQuestionId(null);
             //   Question  has been added successfully
             questionRepository.save(question);
-//             NotificationFactory.getNotification("Question").addNewNotification(question);
+           //  NotificationFactory.getNotification("Question").addNewNotification(question);
+           questionNotifications.addNewNotification(question);
             return new ResponseEntity<>(AddMessage.success, HttpStatus.OK);
            
         
@@ -71,7 +76,8 @@ public class QuestionService {
         if (userExists != null) {
 
                  questionRepository.save(question);
-//                NotificationFactory.getNotification("Question").addNewNotification(question);
+              //  NotificationFactory.getNotification("Question").addNewNotification(question);
+               questionNotifications.addNewNotification(question);
                   return new ResponseEntity<>(UpdateMessage.success, HttpStatus.OK);
    
         } else {

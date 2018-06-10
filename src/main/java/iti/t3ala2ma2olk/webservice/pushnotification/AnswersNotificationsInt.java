@@ -13,5 +13,5 @@ import org.springframework.http.ResponseEntity;
  */
 public interface AnswersNotificationsInt extends NotificationParentInt{
       @Override
-      public <Answers> ResponseEntity<?> addNewNotification(Answers answersDTO);
+      public <Answers> ResponseEntity<?> addNewNotification(Answers answers);
 }

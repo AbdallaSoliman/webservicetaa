@@ -11,6 +11,7 @@ import iti.t3ala2ma2olk.webservice.dto.profile.TaaUserProfile;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +26,7 @@ public class TaaUserProfileController {
     private TaaUserProfileService taaUserProfileService;
     
         @RequestMapping("/TaaUserProfile")       
-    public List<TaaUserProfile> getAllAdmin(Pageable pageable){
+    public List<TaaUserProfile> getAllAdmin(@PageableDefault(value=1000, page=0) Pageable pageable){
         return taaUserProfileService.getAllUserProfile(pageable);
     }
 }

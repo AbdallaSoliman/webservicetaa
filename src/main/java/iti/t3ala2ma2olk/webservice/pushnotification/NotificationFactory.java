@@ -11,8 +11,8 @@ package iti.t3ala2ma2olk.webservice.pushnotification;
  */
 public class NotificationFactory {
     	public static NotificationParent getNotification(String type){
-		if("Question".equalsIgnoreCase(type)) return QuestionNotifications.getInstanceUsingDoubleLocking();
-		else if("Answers".equalsIgnoreCase(type)) return AnswersNotifications.getInstanceUsingDoubleLocking();
+		//if("Question".equalsIgnoreCase(type)) return QuestionNotifications.getInstanceUsingDoubleLocking();
+		//else if("Answers".equalsIgnoreCase(type)) return AnswersNotifications.getInstanceUsingDoubleLocking();
 		
 		return null;
 	}
