@@ -5,7 +5,6 @@
  */
 package iti.t3ala2ma2olk.webservice.businesslayer.service;
 
-
 import iti.t3ala2ma2olk.webservice.businesslayer.msg.DeleteMessage;
 import iti.t3ala2ma2olk.webservice.businesslayer.msg.FindMessage;
 import iti.t3ala2ma2olk.webservice.businesslayer.msg.LoginMessage;
@@ -19,6 +18,7 @@ import iti.t3ala2ma2olk.webservice.security.model.AuthorityName;
 import java.util.ArrayList;
 import java.util.List;
 import org.modelmapper.ModelMapper;
+import iti.t3ala2ma2olk.webservice.businesslayer.factory.ModelMapperFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
@@ -36,10 +36,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PersonService {
 
-    private static final ModelMapper modelMapper = new ModelMapper();
-
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private static final ModelMapper modelMapper = ModelMapperFactory.getModelMapper();
 
     @Autowired
     private PersonRepository personRepository;
@@ -59,62 +56,12 @@ public class PersonService {
     }
 
     public ResponseEntity<?> addPerson(Person person) {
-        person.setPersonId(null);
-        Person userExists = personRepository.findPersonByEmail(person.getEmail());
-        if (userExists != null) {
-            //  msg.setMsgBody("There is already a user registered with this email");
-            return new ResponseEntity<>(RegistrationMessage.repeatedEmail, HttpStatus.OK);
-        } else if (personRepository.findByUsername(person.getUsername()) != null) {
-            //     msg.setMsgBody("There is already a user registered with this user name");
-           return new ResponseEntity<>(RegistrationMessage.repeatedUsername, HttpStatus.OK);
-        } else {
-            person.setPassword(bCryptPasswordEncoder.encode(person.getPassword()));
-            List<Authority> authorityLsit = new ArrayList();
-            authorityLsit.add(new Authority(1, AuthorityName.ROLE_USER));
-            person.setAuthorities(authorityLsit);
-            //   msg.setMsgBody("User has been registered successfully");
-            return new ResponseEntity<>(personRepository.save(person), HttpStatus.OK);
-           // return new ResponseEntity<>(RegistrationMessage.success, HttpStatus.OK);
-        }
-
+        return new ResponseEntity<>(personRepository.save(person), HttpStatus.OK);
     }
 
     public ResponseEntity<?> updatePerson(Person person) {
-        Person userExists = personRepository.findById(person.getPersonId()).orElse(null);
-
-        if (userExists != null) {
-
-            if (((personRepository.findPersonByEmail(person.getEmail()) == null)
-                    && (personRepository.findByUsername(person.getUsername()) == null))//change username & email
-                    || ((userExists.getEmail().equals(person.getEmail()))
-                    && (userExists.getUsername().equals(person.getUsername())))//change other data
-                    ||((personRepository.findPersonByEmail(person.getEmail()) == null)
-                    &&(userExists.getUsername().equals(person.getUsername())))//change email
-                    ||((personRepository.findByUsername(person.getUsername()) == null)
-                    &&(userExists.getEmail().equals(person.getEmail()))))//change username
-            {
-                
-                if (!userExists.getPassword().equals(person.getPassword())) {
-                    person.setPassword(bCryptPasswordEncoder.encode(person.getPassword()));
-                }
-                //   msg.setMsgBody("User has been updated successfully ");
-                       personRepository.save(person);
-                  return new ResponseEntity<>(UpdateMessage.success, HttpStatus.OK);
-          
-
-            } else if(personRepository.findPersonByEmail(person.getEmail()) != null
-                    &&(userExists.getUsername().equals(person.getUsername()))){
-            //   msg.setMsgBody("There is a user registered with this email or user name");
-             return new ResponseEntity<>(UpdateMessage.repeatedEmail, HttpStatus.OK);
-
-        } else{
-                return new ResponseEntity<>(UpdateMessage.repeatedUsername, HttpStatus.OK);
-            }
-            
-            
-            
-        } 
-       return new ResponseEntity<>(UpdateMessage.fail, HttpStatus.OK);
+        personRepository.save(person);
+        return new ResponseEntity<>(UpdateMessage.success, HttpStatus.OK);
     }
 
     public ResponseEntity<?> deletePerson(Integer id) {

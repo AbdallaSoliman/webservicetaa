@@ -2,6 +2,7 @@ package iti.t3ala2ma2olk.webservice.dto.profile.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
+import iti.t3ala2ma2olk.webservice.businesslayer.factory.ModelMapperFactory;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.http.HttpInputMessage;
@@ -24,7 +25,7 @@ import java.lang.reflect.Type;
 import java.util.Collections;
 
 public class DTOModelMapper extends RequestResponseBodyMethodProcessor {
-    private static final ModelMapper modelMapper = new ModelMapper();
+       private static final ModelMapper modelMapper = ModelMapperFactory.getModelMapper();
 
     private EntityManager entityManager;
 

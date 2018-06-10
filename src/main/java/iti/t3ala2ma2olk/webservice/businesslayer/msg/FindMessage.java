@@ -5,11 +5,13 @@
  */
 package iti.t3ala2ma2olk.webservice.businesslayer.msg;
 
+import iti.t3ala2ma2olk.webservice.businesslayer.factory.MessageFactory;
+
 /**
  *
  * @author abdalla
  */
 public class FindMessage {
-    public static MessageDTO success =new MessageDTO( "Find Done successfully");
-    public static MessageDTO fail =new MessageDTO(  "Find fail");
+    public static MessageDTO success =MessageFactory.getMessageDTO( "Find Done successfully");
+    public static MessageDTO fail =MessageFactory.getMessageDTO(  "Find fail");
 }

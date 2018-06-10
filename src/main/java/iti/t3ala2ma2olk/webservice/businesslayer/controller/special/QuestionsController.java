@@ -35,7 +35,9 @@ public class QuestionsController {
          List <QuestionCustomDTO> questions=new ArrayList<QuestionCustomDTO>();
          SubCatDTO  subCat=subCatService.getSubCatWithId(id);
          
+         
          subCat.getQuestionCollection().forEach((temp) -> {
+             if(temp.getIsdeleted()!= 1){
                 QuestionCustomDTO tempQuestionCustomDTO=new QuestionCustomDTO();
                 tempQuestionCustomDTO.setQuestionId(temp.getQuestionId());
                 tempQuestionCustomDTO.setTitle(temp.getTitle());
@@ -43,6 +45,7 @@ public class QuestionsController {
                 tempQuestionCustomDTO.setVerified(temp.getVerified());
                 tempQuestionCustomDTO.setNumOfAns(temp.getAnswersCollection().size());
                 questions.add(tempQuestionCustomDTO);
+             }
          });
          
          questionWithSubCatDTO.setQuestions(questions);

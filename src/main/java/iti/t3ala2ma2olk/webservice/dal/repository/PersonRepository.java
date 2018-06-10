@@ -15,13 +15,17 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author abdalla
  */
-public interface PersonRepository extends  CrudRepository<Person, Integer>{
-  //  Person findByUsername(String username);
+public interface PersonRepository extends CrudRepository<Person, Integer> {
+    //  Person findByUsername(String username);
+
     public Person findPersonByEmail(String email);
+
     public Person findByUsername(String username);
-    public Person findByUsernameAndPassword(String username,String password);
+
+    public Person findByUsernameAndPassword(String username, String password);
 //    public  List<Person> findByTaaUser(null);
 
     public Page findAll(Pageable pageable);
-    
+
+//    public Integer findAnswersIdByUsername(String username);
 }

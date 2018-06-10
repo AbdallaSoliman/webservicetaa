@@ -5,16 +5,18 @@
  */
 package iti.t3ala2ma2olk.webservice.businesslayer.msg;
 
+import iti.t3ala2ma2olk.webservice.businesslayer.factory.MessageFactory;
+
 /**
  *
  * @author abdalla
  */
 public class UpdateMessage {
 
-    public static MessageDTO success =new MessageDTO( "Update Done successfully");
-    public static MessageDTO fail = new MessageDTO( "Update fail");
-    public static MessageDTO repeatedUsername =new MessageDTO(  "Update fail , repeated Username");
-    public static MessageDTO repeatedEmail =new MessageDTO(  "Update fail , repeated Email");
-    public static MessageDTO idNotFound =new MessageDTO(  "Update fail ,this user does not exist");
-    public static MessageDTO uniqueField =new MessageDTO(  "Update fail ,please chose unique value");
+    public static MessageDTO success =MessageFactory.getMessageDTO("Update Done successfully");
+    public static MessageDTO fail =MessageFactory.getMessageDTO( "Update fail");
+    public static MessageDTO repeatedUsername =MessageFactory.getMessageDTO(  "Update fail , repeated Username");
+    public static MessageDTO repeatedEmail =MessageFactory.getMessageDTO(  "Update fail , repeated Email");
+    public static MessageDTO idNotFound =MessageFactory.getMessageDTO(  "Update fail ,this user does not exist");
+    public static MessageDTO uniqueField =MessageFactory.getMessageDTO(  "Update fail ,please chose unique value");
 }

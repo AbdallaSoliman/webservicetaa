@@ -12,6 +12,7 @@ import iti.t3ala2ma2olk.webservice.security.model.Person;
 import java.util.ArrayList;
 import java.util.List;
 import org.modelmapper.ModelMapper;
+import iti.t3ala2ma2olk.webservice.businesslayer.factory.ModelMapperFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +26,7 @@ import org.springframework.stereotype.Service;
 public class TaaUserProfileService {
 
     
-        private static final ModelMapper modelMapper = new ModelMapper();
+           private static final ModelMapper modelMapper = ModelMapperFactory.getModelMapper();
     @Autowired
     private TaaUserProfileRepository taaUserRepository;
 

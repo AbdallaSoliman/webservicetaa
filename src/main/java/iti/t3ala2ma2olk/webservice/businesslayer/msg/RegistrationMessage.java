@@ -5,6 +5,7 @@
  */
 package iti.t3ala2ma2olk.webservice.businesslayer.msg;
 
+import iti.t3ala2ma2olk.webservice.businesslayer.factory.MessageFactory;
 import javax.persistence.Entity;
 
 /**
@@ -14,11 +15,11 @@ import javax.persistence.Entity;
 
 public class RegistrationMessage {
     
-   public static MessageDTO success =new MessageDTO( "Registration Done successfully");
-   public static MessageDTO fail=new MessageDTO("Registration fail");
-       public static MessageDTO repeatedUsername =new MessageDTO( "Registration fail , repeated Username");
-    public static MessageDTO repeatedEmail =new MessageDTO( "Registration fail , repeated Email");
-    public static MessageDTO idNotFound =new MessageDTO( "Registration fail ,this user does not exist");
-    public static MessageDTO uniqueField =new MessageDTO( "Registration fail ,please chose unique value");
+   public static MessageDTO success =MessageFactory.getMessageDTO( "Registration Done successfully");
+   public static MessageDTO fail=MessageFactory.getMessageDTO("Registration fail");
+       public static MessageDTO repeatedUsername =MessageFactory.getMessageDTO( "Registration fail , repeated Username");
+    public static MessageDTO repeatedEmail =MessageFactory.getMessageDTO( "Registration fail , repeated Email");
+    public static MessageDTO idNotFound =MessageFactory.getMessageDTO( "Registration fail ,this user does not exist");
+    public static MessageDTO uniqueField =MessageFactory.getMessageDTO( "Registration fail ,please chose unique value");
     
 }

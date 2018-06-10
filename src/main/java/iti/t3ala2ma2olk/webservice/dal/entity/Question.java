@@ -26,15 +26,19 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 
 /**
  *
  * @author abdalla
  */
 @Entity
+@Indexed
 @Table(name = "question")
 
 @NamedQueries({
@@ -61,9 +65,11 @@ public class Question implements Serializable {
     private Integer questionId;
     @Size(max = 145)
     @Column(name = "title")
+    @Field
     private String title;
     @Size(max = 4045)
     @Column(name = "body")
+    @Field
     private String body;
     @Size(max = 445)
     @Column(name = "image")
@@ -78,6 +84,7 @@ public class Question implements Serializable {
     private Integer rate;
     @Column(name = "verified")
     private Integer verified;
+    @NotNull
     @Column(name = "isdeleted")
     private Integer isdeleted;
     @Column(name = "notifi")
@@ -203,7 +210,7 @@ public class Question implements Serializable {
         this.closed = closed;
     }
 
-    @XmlTransient
+
     public Collection<SubCat> getSubCatCollection() {
         return subCatCollection;
     }
@@ -211,7 +218,7 @@ public class Question implements Serializable {
     public void setSubCatCollection(Collection<SubCat> subCatCollection) {
         this.subCatCollection = subCatCollection;
     }
-    @XmlTransient
+
     public Collection<Person> getPersonRateCollection() {
         return personRateCollection;
     }
@@ -230,7 +237,7 @@ public class Question implements Serializable {
         this.personId = personId;
     }
 
-    @XmlTransient
+
     public Collection<Answers> getAnswersCollection() {
         return answersCollection;
     }

@@ -5,11 +5,12 @@ import iti.t3ala2ma2olk.webservice.test1.main.java.com.questionmarks.model.dto.E
 import iti.t3ala2ma2olk.webservice.test1.main.java.com.questionmarks.model.dto.ExamUpdateDTO;
 import org.junit.Test;
 import org.modelmapper.ModelMapper;
+import iti.t3ala2ma2olk.webservice.businesslayer.factory.ModelMapperFactory;
 
 import static org.junit.Assert.assertEquals;
 
 public class ExamUT {
-    private static final ModelMapper modelMapper = new ModelMapper();
+       private static final ModelMapper modelMapper = ModelMapperFactory.getModelMapper();
 
     @Test
     public void checkExamMapping() {

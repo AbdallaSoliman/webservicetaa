@@ -18,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -43,6 +44,7 @@ public class MainCategories implements Serializable {
     private Integer mainCategoriesId;
     @Size(max = 45)
     @Column(name = "cat_name")
+    @NotNull
     private String catName;
     @OneToMany(mappedBy = "mainCategoriesId",cascade = CascadeType.ALL)
     private Collection<SubCat> subCatCollection;

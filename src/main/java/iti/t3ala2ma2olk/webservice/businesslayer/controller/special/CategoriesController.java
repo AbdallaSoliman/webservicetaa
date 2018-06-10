@@ -57,7 +57,7 @@ public class CategoriesController {
       } 
       
       
-      /* ali */
+      /*start ali */
 @RequestMapping("/MainCategoryWithSubs")
     public List<MainCatDTOSpe> getAllMainCategoriesAndQuestions(@PageableDefault(value=10, page=0) Pageable pageable) {
         List<MainCategories> catList=mainCategoriesService.getAllMainCategories(pageable);
@@ -111,5 +111,5 @@ public class CategoriesController {
          SubCatDTO  subCat=subCatService.getSubCatWithId(catID);
          return subCat.getQuestionCollection().size();
     }
-/* ali */
+/*end ali */
 }

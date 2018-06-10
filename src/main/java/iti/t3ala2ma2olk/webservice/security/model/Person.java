@@ -73,6 +73,7 @@ public class Person implements Serializable {
     private String password;
      @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 45)
+    @Column(unique = true)
     private String email;
     @Size(max = 45)
     private String type;
@@ -80,6 +81,7 @@ public class Person implements Serializable {
     private String gender;
     private boolean enabled;
     @Size(max = 50)
+    @Column(unique = true)
     private String username;
     @Column(name = "last_password_reset_date")
     @Temporal(TemporalType.DATE)

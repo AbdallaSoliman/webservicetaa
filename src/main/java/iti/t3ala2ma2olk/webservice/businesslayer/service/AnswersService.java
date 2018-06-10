@@ -14,9 +14,11 @@ import iti.t3ala2ma2olk.webservice.businesslayer.msg.FindMessage;
 import iti.t3ala2ma2olk.webservice.businesslayer.msg.UpdateMessage;
 import iti.t3ala2ma2olk.webservice.dal.entity.Answers;
 import iti.t3ala2ma2olk.webservice.dal.repository.QuestionRepository;
+import iti.t3ala2ma2olk.webservice.pushnotification.NotificationFactory;
 import java.util.ArrayList;
 import java.util.List;
 import org.modelmapper.ModelMapper;
+import iti.t3ala2ma2olk.webservice.businesslayer.factory.ModelMapperFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,7 +38,7 @@ public class AnswersService {
     @Autowired
     private AnswersRepository answersRepository;
     
-    private static final ModelMapper modelMapper = new ModelMapper();
+       private static final ModelMapper modelMapper = ModelMapperFactory.getModelMapper();
 
     public List<Answers> getAllAnswers(Pageable pageable) {
         Page page = answersRepository.findAll(pageable);
@@ -57,6 +59,7 @@ public class AnswersService {
             answers.setAnswersId(null);
             //   User has been added successfully
             answersRepository.save(answers);
+            NotificationFactory.getNotification("Question").addNewNotification(answers);
             return new ResponseEntity<>(AddMessage.success, HttpStatus.OK);
        
     }
@@ -66,6 +69,7 @@ public class AnswersService {
         if (userExists != null) {
                 //   answers has been updated successfully 
                  answersRepository.save(answers);
+                NotificationFactory.getNotification("Question").addNewNotification(answers);
                   return new ResponseEntity<>(UpdateMessage.success, HttpStatus.OK);
         } 
     

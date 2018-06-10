@@ -29,7 +29,27 @@ public class JwtAuthorizationTokenFilter extends OncePerRequestFilter {
         this.jwtTokenUtil = jwtTokenUtil;
         this.tokenHeader = tokenHeader;
     }
+    public String getCurrentPerson(HttpServletRequest request) {
+       logger.debug("processing authentication for '{}'", request.getRequestURL());
+        final String requestHeader = request.getHeader(this.tokenHeader);
 
+        String authToken = null;
+
+        String username = null;
+        if (requestHeader != null && requestHeader.startsWith("Bearer ")) {
+            authToken = requestHeader.substring(7);
+            try {
+                username = jwtTokenUtil.getUsernameFromToken(authToken);
+            } catch (IllegalArgumentException e) {
+                logger.error("an error occured during getting username from token", e);
+            } catch (ExpiredJwtException e) {
+                logger.warn("the token is expired and not valid anymore", e);
+            }
+        } else {
+            logger.warn("couldn't find bearer string, will ignore the header");
+        }
+        return username;
+    }
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         logger.debug("processing authentication for '{}'", request.getRequestURL());

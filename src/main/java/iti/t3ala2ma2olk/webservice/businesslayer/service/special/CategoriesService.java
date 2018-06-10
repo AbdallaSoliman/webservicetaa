@@ -19,6 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import org.modelmapper.ModelMapper;
+import iti.t3ala2ma2olk.webservice.businesslayer.factory.ModelMapperFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,7 +34,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CategoriesService {
 
-    private static final ModelMapper modelMapper = new ModelMapper();
+       private static final ModelMapper modelMapper = ModelMapperFactory.getModelMapper();
 
     @Autowired
     private CategoriesRepository categoriesRepository;

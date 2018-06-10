@@ -5,11 +5,13 @@
  */
 package iti.t3ala2ma2olk.webservice.businesslayer.msg;
 
+import iti.t3ala2ma2olk.webservice.businesslayer.factory.MessageFactory;
+
 /**
  *
  * @author abdalla
  */
 public class LoginMessage {
-   public static MessageDTO success =new MessageDTO( "Login Done successfully");
-   public static MessageDTO fail=new MessageDTO("Login fail");
+   public static MessageDTO success =MessageFactory.getMessageDTO( "Login Done successfully");
+   public static MessageDTO fail=MessageFactory.getMessageDTO("Login fail");
 }

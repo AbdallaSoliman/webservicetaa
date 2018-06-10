@@ -21,6 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -47,9 +48,11 @@ public class SubCat implements Serializable {
     private Integer subCatId;
     @Size(max = 45)
     @Column(name = "sub_cat_name")
+    @NotNull
     private String subCatName;
     @Size(max = 445)
     @Column(name = "description")
+    @NotNull
     private String description;
     @ManyToMany(mappedBy = "subCatCollection")
     private Collection<Question> questionCollection;

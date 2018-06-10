@@ -17,6 +17,7 @@ import iti.t3ala2ma2olk.webservice.businesslayer.msg.UpdateMessage;
 import java.util.ArrayList;
 import java.util.List;
 import org.modelmapper.ModelMapper;
+import iti.t3ala2ma2olk.webservice.businesslayer.factory.ModelMapperFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,7 +37,7 @@ public class NotifiAnswersService {
     @Autowired
     private NotifiAnswersRepository notifiAnswersRepository;
 
-    private static final ModelMapper modelMapper = new ModelMapper();
+       private static final ModelMapper modelMapper = ModelMapperFactory.getModelMapper();
 
     public List<NotifiAnswers> getAllNotifiAnswers(Pageable pageable) {
         Page page = notifiAnswersRepository.findAll(pageable);

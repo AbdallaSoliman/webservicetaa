@@ -5,12 +5,14 @@
  */
 package iti.t3ala2ma2olk.webservice.businesslayer.msg;
 
+import iti.t3ala2ma2olk.webservice.businesslayer.factory.MessageFactory;
+
 /**
  *
  * @author abdalla
  */
 public class DeleteMessage {
 
-    public static MessageDTO success =new MessageDTO( "Delete Done successfully");
-    public static MessageDTO fail =new MessageDTO( "Delete fail");
+    public static MessageDTO success =MessageFactory.getMessageDTO( "Delete Done successfully");
+    public static MessageDTO fail =MessageFactory.getMessageDTO( "Delete fail");
 }

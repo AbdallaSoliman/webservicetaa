@@ -5,6 +5,7 @@
  */
 package iti.t3ala2ma2olk.webservice.businesslayer.service;
 
+
 import iti.t3ala2ma2olk.webservice.dal.entity.Admin;
 import iti.t3ala2ma2olk.webservice.dal.repository.AdminRepository;
 import iti.t3ala2ma2olk.webservice.dto.AdminDTO;
@@ -16,6 +17,7 @@ import iti.t3ala2ma2olk.webservice.businesslayer.msg.RegistrationMessage;
 import iti.t3ala2ma2olk.webservice.businesslayer.msg.UpdateMessage;
 import java.util.List;
 import org.modelmapper.ModelMapper;
+import iti.t3ala2ma2olk.webservice.businesslayer.factory.ModelMapperFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,7 +34,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class AdminService {
 
-    private static final ModelMapper modelMapper = new ModelMapper();
+//       private static final ModelMapper modelMapper = ModelMapperFactory.getModelMapper();
+    private static final ModelMapper modelMapper = ModelMapperFactory.getModelMapper();
     /* using to encode Password to be secur*/
 //    @Autowired
 //    private BCryptPasswordEncoder bCryptPasswordEncoder;

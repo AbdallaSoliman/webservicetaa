@@ -19,5 +19,8 @@ public interface AnswersRepository extends  CrudRepository<Answers, Integer>{
 
 //    public Page<Answers> findByQuestionId(Question questionId);
     
-     Page<Answers> findAll(Pageable pageable);
+    public Page<Answers> findAll(Pageable pageable);
+
+    public Answers findByAnswersId(Integer id);
+
 }
