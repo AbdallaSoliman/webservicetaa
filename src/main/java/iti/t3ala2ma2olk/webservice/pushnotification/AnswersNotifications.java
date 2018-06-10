@@ -6,7 +6,8 @@
 package iti.t3ala2ma2olk.webservice.pushnotification;
 
 
-import iti.t3ala2ma2olk.webservice.dto.AnswersDTO;
+
+import iti.t3ala2ma2olk.webservice.dal.entity.Answers;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import org.json.JSONObject;
@@ -19,7 +20,7 @@ import org.springframework.http.ResponseEntity;
  *
  * @author abdalla
  */
-public class AnswersNotifications extends NotificationParent<AnswersDTO>{
+public class AnswersNotifications extends NotificationParent<Answers>{
     
        	@Autowired
 	AndroidPushNotificationsService androidPushNotificationsService;
@@ -41,7 +42,7 @@ private static AnswersNotifications instance;
 
     
     @Override
-    public  ResponseEntity<?> addNewNotification(AnswersDTO answersDTO){
+    public  ResponseEntity<?> addNewNotification(Answers answersDTO){
         JSONObject body = new JSONObject();
         
 		body.put("to", "/topics/" +"QuestionNotifications"+ answersDTO.getQuestionId().getQuestionId());

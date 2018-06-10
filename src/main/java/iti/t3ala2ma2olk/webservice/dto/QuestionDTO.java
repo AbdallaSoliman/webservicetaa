@@ -54,8 +54,7 @@ public class QuestionDTO {
 
     private Integer isdeleted;
 
-    private Integer notifi;
-    
+    private Integer notifi;    
 
     private Date questionDate;
 

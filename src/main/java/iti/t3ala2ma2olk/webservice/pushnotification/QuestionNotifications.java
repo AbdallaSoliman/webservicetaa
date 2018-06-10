@@ -5,7 +5,8 @@
  */
 package iti.t3ala2ma2olk.webservice.pushnotification;
 
-import iti.t3ala2ma2olk.webservice.dto.QuestionDTO;
+
+import iti.t3ala2ma2olk.webservice.dal.entity.Question;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import org.json.JSONObject;
@@ -18,7 +19,7 @@ import org.springframework.http.ResponseEntity;
  *
  * @author abdalla
  */
-public class QuestionNotifications  extends NotificationParent<QuestionDTO>{
+public class QuestionNotifications  extends NotificationParent<Question>{
 
 
     	@Autowired
@@ -39,7 +40,7 @@ public class QuestionNotifications  extends NotificationParent<QuestionDTO>{
         
 
     
-    public ResponseEntity<?> addNewNotification(QuestionDTO questionDTO){
+    public ResponseEntity<?> addNewNotification(Question questionDTO){
         JSONObject body = new JSONObject();
 		body.put("to", "/topics/" +"QuestionNotifications"+ questionDTO.getQuestionId());
 		body.put("priority", "high");

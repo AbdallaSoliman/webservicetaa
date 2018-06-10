@@ -60,7 +60,7 @@ public class QuestionService {
             question.setQuestionId(null);
             //   Question  has been added successfully
             questionRepository.save(question);
-             NotificationFactory.getNotification("Question").addNewNotification(question);
+//             NotificationFactory.getNotification("Question").addNewNotification(question);
             return new ResponseEntity<>(AddMessage.success, HttpStatus.OK);
            
         
@@ -71,7 +71,7 @@ public class QuestionService {
         if (userExists != null) {
 
                  questionRepository.save(question);
-                NotificationFactory.getNotification("Question").addNewNotification(question);
+//                NotificationFactory.getNotification("Question").addNewNotification(question);
                   return new ResponseEntity<>(UpdateMessage.success, HttpStatus.OK);
    
         } else {

@@ -5,7 +5,7 @@
  */
 package iti.t3ala2ma2olk.webservice.businesslayer.service;
 
-import iti.t3ala2ma2olk.webservice.dal.entity.Answers;
+
 import iti.t3ala2ma2olk.webservice.dal.repository.AnswersRepository;
 import iti.t3ala2ma2olk.webservice.dto.AnswersDTO;
 import iti.t3ala2ma2olk.webservice.businesslayer.msg.AddMessage;
@@ -59,7 +59,7 @@ public class AnswersService {
             answers.setAnswersId(null);
             //   User has been added successfully
             answersRepository.save(answers);
-            NotificationFactory.getNotification("Question").addNewNotification(answers);
+         //   NotificationFactory.getNotification("Question").addNewNotification(answers);
             return new ResponseEntity<>(AddMessage.success, HttpStatus.OK);
        
     }
@@ -69,7 +69,7 @@ public class AnswersService {
         if (userExists != null) {
                 //   answers has been updated successfully 
                  answersRepository.save(answers);
-                NotificationFactory.getNotification("Question").addNewNotification(answers);
+//                NotificationFactory.getNotification("Question").addNewNotification(answers);
                   return new ResponseEntity<>(UpdateMessage.success, HttpStatus.OK);
         } 
     
