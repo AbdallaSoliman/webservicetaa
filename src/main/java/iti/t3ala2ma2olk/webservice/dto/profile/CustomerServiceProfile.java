@@ -19,6 +19,11 @@ public class CustomerServiceProfile {
    private Integer id;
    private String username;
 
+    public CustomerServiceProfile() {
+    }
+
+   
+   
     public CustomerServiceProfile(Integer id, String username) {
         this.id = id;
         this.username = username;
