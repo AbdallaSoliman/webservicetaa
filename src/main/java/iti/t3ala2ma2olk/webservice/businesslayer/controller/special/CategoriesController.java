@@ -13,7 +13,9 @@ import iti.t3ala2ma2olk.webservice.dto.SubCatDTO;
 import iti.t3ala2ma2olk.webservice.dto.special.CategoriesDTO;
 import iti.t3ala2ma2olk.webservice.dto.special.DescriptionDTO;
 import iti.t3ala2ma2olk.webservice.dto.special.MainCatDTOSpe;
+import iti.t3ala2ma2olk.webservice.dto.special.MainCategoriesSpecial;
 import iti.t3ala2ma2olk.webservice.dto.special.SubCatDTOSpe;
+import iti.t3ala2ma2olk.webservice.dto.special.SubCatSpecial;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,5 +113,33 @@ public class CategoriesController {
          SubCatDTO  subCat=subCatService.getSubCatWithId(catID);
          return subCat.getQuestionCollection().size();
     }
+    
+    @RequestMapping("/MainCategoriesSpecial")
+    public List<MainCategoriesSpecial> getMainCategoriesSpecial(@PageableDefault(value=10, page=0) Pageable pageable){
+        List<MainCategories> mainCategories=mainCategoriesService.getAllMainCategories(pageable);
+        List<MainCategoriesSpecial> mainCategoriesSpecial=new ArrayList<MainCategoriesSpecial>();
+        
+        for (int i=0;i<mainCategories.size();++i){
+            MainCategoriesSpecial temp=new MainCategoriesSpecial();
+            temp.setCatName(mainCategories.get(i).getCatName());
+            temp.setMainCategoriesId(mainCategories.get(i).getMainCategoriesId());
+            
+            mainCategories.get(i).getSubCatCollection().forEach((tempSub) -> {
+            
+                SubCatSpecial tempSubCat=new SubCatSpecial();
+                tempSubCat.setDescription(tempSub.getDescription());
+                tempSubCat.setImgUrl(tempSub.getImgUrl());
+                tempSubCat.setNumOfQuestion(tempSub.getQuestionCollection().size());
+                tempSubCat.setSubCatId(tempSub.getSubCatId());
+                tempSubCat.setSubCatName(tempSub.getSubCatName());
+                temp.getSubCatCollection().add(tempSubCat);
+            });
+            
+            mainCategoriesSpecial.add(temp);
+        }
+        
+        return mainCategoriesSpecial;
+    }
+    
 /*end ali */
 }
