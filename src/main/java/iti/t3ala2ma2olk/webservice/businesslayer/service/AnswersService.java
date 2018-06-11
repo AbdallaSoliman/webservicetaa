@@ -12,7 +12,7 @@ import iti.t3ala2ma2olk.webservice.businesslayer.msg.DeleteMessage;
 import iti.t3ala2ma2olk.webservice.businesslayer.msg.FindMessage;
 import iti.t3ala2ma2olk.webservice.businesslayer.msg.UpdateMessage;
 import iti.t3ala2ma2olk.webservice.dal.entity.Answers;
-import iti.t3ala2ma2olk.webservice.dal.repository.QuestionRepository;
+import iti.t3ala2ma2olk.webservice.dal.repository.AnswersRepository;
 import iti.t3ala2ma2olk.webservice.pushnotification.NotificationFactory;
 import java.util.ArrayList;
 import java.util.List;
@@ -82,8 +82,14 @@ public class AnswersService {
     }
 
     public ResponseEntity<?> deleteAnswers(Integer id) {
-        answersRepository.deleteById(id);
-        return new ResponseEntity<>(DeleteMessage.success, HttpStatus.OK);
+       Answers answers= answersRepository.findById(id).orElse(null);
+        if (answers!= null) {
+            answers.setIsdeleted(1);
+              answersRepository.save(answers);
+            return new ResponseEntity<>(DeleteMessage.success, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(DeleteMessage.fail, HttpStatus.OK);
+        }
     }
 
 }

@@ -87,8 +87,14 @@ public class QuestionService {
     }
 
     public ResponseEntity<?> deleteQuestion(Integer id) {
-        questionRepository.deleteById(id);
-        return new ResponseEntity<>(DeleteMessage.success, HttpStatus.OK);
+       Question question= questionRepository.findById(id).orElse(null);
+        if (question!= null) {
+            question.setIsdeleted(1);
+              questionRepository.save(question);
+            return new ResponseEntity<>(DeleteMessage.success, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(DeleteMessage.fail, HttpStatus.OK);
+        }
     }
 
 
