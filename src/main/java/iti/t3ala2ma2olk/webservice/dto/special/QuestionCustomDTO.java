@@ -22,5 +22,16 @@ public class QuestionCustomDTO {
     private Integer numOfAns;
     private Integer verified;
     private Date questionDate;
+
+    public QuestionCustomDTO() {
+    }
+
+    public QuestionCustomDTO(Integer questionId, String title, Integer numOfAns, Integer verified, Date questionDate) {
+        this.questionId = questionId;
+        this.title = title;
+        this.numOfAns = numOfAns;
+        this.verified = verified;
+        this.questionDate = questionDate;
+    }
     
 }
