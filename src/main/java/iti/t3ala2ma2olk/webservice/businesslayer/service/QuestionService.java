@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.modelmapper.ModelMapper;
 import iti.t3ala2ma2olk.webservice.businesslayer.factory.ModelMapperFactory;
+import iti.t3ala2ma2olk.webservice.dal.entity.Answers;
 import iti.t3ala2ma2olk.webservice.pushnotification.QuestionNotifications;
 import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,25 +48,34 @@ public class QuestionService {
     private static final ModelMapper modelMapper = ModelMapperFactory.getModelMapper();
 
     public List<Question> getAllQuestion(Pageable pageable) {
-                //abdalla start
+        //abdalla start
         List<Question> list = new ArrayList();
         List<Question> filteredlist = new ArrayList();
 
-
         questionRepository.findAll().forEach(list::add);
-        list.stream().filter(predicate->predicate.getIsdeleted()==0).forEach(filteredlist::add);
-           int start = (int) pageable.getOffset();
+        list.stream().filter(predicate -> predicate.getIsdeleted() == 0).forEach(filteredlist::add);
+        int start = (int) pageable.getOffset();
         int end = (start + pageable.getPageSize()) > filteredlist.size() ? filteredlist.size() : (start + pageable.getPageSize());
         Page<Question> pages = new PageImpl<Question>(filteredlist.subList(start, end), pageable, filteredlist.size());
-    
+
         return pages.getContent();
         //abdalla end
     }
 
     public ResponseEntity<?> getQuestion(Integer id) {
-
-        if (modelMapper.map(questionRepository.findById(id).orElse(null), QuestionDTO.class) != null) {
-            return new ResponseEntity<>(modelMapper.map(questionRepository.findById(id).orElse(null), QuestionDTO.class), HttpStatus.OK);
+        //abdalla start
+        QuestionDTO questionDTO=new QuestionDTO();
+        List<Answers> filteredlist = new ArrayList();
+        questionDTO =modelMapper.map(questionRepository.findById(id).orElse(null), QuestionDTO.class);
+        //abdalla end
+        if (questionDTO != null) {
+            
+            if(questionDTO.getAnswersCollection()!=null)
+            {
+         questionDTO.getAnswersCollection().stream().filter(predicate -> predicate.getIsdeleted() == 0).forEach(filteredlist::add);
+              questionDTO.setAnswersCollection(filteredlist);
+            }
+            return new ResponseEntity<>(questionDTO, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(FindMessage.fail, HttpStatus.OK);
         }
