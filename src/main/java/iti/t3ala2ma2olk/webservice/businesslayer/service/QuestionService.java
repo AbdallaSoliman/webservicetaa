@@ -21,6 +21,7 @@ import org.modelmapper.ModelMapper;
 import iti.t3ala2ma2olk.webservice.businesslayer.factory.ModelMapperFactory;
 import iti.t3ala2ma2olk.webservice.dal.entity.Answers;
 import iti.t3ala2ma2olk.webservice.pushnotification.QuestionNotifications;
+import java.util.Date;
 import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -85,6 +86,7 @@ public class QuestionService {
 
         question.setQuestionId(null);
         question.setIsdeleted(0);
+        question.setQuestionDate(new Date());
         //   Question  has been added successfully
         questionRepository.save(question);
         //  NotificationFactory.getNotification("Question").addNewNotification(question);
