@@ -19,6 +19,6 @@ import org.springframework.data.repository.CrudRepository;
 //@Repository
 public interface QuestionRepository extends  CrudRepository<Question, Integer>{
       public Page<Question> findAll(Pageable pageable);
-      
+    
       public Question findByQuestionId(Integer questionId);
 }

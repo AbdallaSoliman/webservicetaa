@@ -20,8 +20,10 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import iti.t3ala2ma2olk.webservice.businesslayer.factory.ModelMapperFactory;
 import iti.t3ala2ma2olk.webservice.pushnotification.QuestionNotifications;
+import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,17 +38,28 @@ import org.springframework.stereotype.Service;
 @Service
 public class QuestionService {
 
-        @Autowired
+    @Autowired
     private QuestionNotifications questionNotifications;
-    
+
     @Autowired
     private QuestionRepository questionRepository;
 
-       private static final ModelMapper modelMapper = ModelMapperFactory.getModelMapper();
+    private static final ModelMapper modelMapper = ModelMapperFactory.getModelMapper();
 
     public List<Question> getAllQuestion(Pageable pageable) {
-        Page page = questionRepository.findAll(pageable);
-        return page.getContent();
+                //abdalla start
+        List<Question> list = new ArrayList();
+        List<Question> filteredlist = new ArrayList();
+
+
+        questionRepository.findAll().forEach(list::add);
+        list.stream().filter(predicate->predicate.getIsdeleted()==0).forEach(filteredlist::add);
+           int start = (int) pageable.getOffset();
+        int end = (start + pageable.getPageSize()) > filteredlist.size() ? filteredlist.size() : (start + pageable.getPageSize());
+        Page<Question> pages = new PageImpl<Question>(filteredlist.subList(start, end), pageable, filteredlist.size());
+    
+        return pages.getContent();
+        //abdalla end
     }
 
     public ResponseEntity<?> getQuestion(Integer id) {
@@ -60,26 +73,25 @@ public class QuestionService {
 
     public ResponseEntity<?> addQuestion(Question question) {
 
+        question.setQuestionId(null);
+        question.setIsdeleted(0);
+        //   Question  has been added successfully
+        questionRepository.save(question);
+        //  NotificationFactory.getNotification("Question").addNewNotification(question);
+        questionNotifications.addNewNotification(question);
+        return new ResponseEntity<>(AddMessage.success, HttpStatus.OK);
 
-            question.setQuestionId(null);
-            //   Question  has been added successfully
-            questionRepository.save(question);
-           //  NotificationFactory.getNotification("Question").addNewNotification(question);
-           questionNotifications.addNewNotification(question);
-            return new ResponseEntity<>(AddMessage.success, HttpStatus.OK);
-           
-        
     }
 
     public ResponseEntity<?> updateQuestion(Question question) {
         Question userExists = questionRepository.findById(question.getQuestionId()).orElse(null);
         if (userExists != null) {
 
-                 questionRepository.save(question);
-              //  NotificationFactory.getNotification("Question").addNewNotification(question);
-               questionNotifications.addNewNotification(question);
-                  return new ResponseEntity<>(UpdateMessage.success, HttpStatus.OK);
-   
+            questionRepository.save(question);
+            //  NotificationFactory.getNotification("Question").addNewNotification(question);
+            questionNotifications.addNewNotification(question);
+            return new ResponseEntity<>(UpdateMessage.success, HttpStatus.OK);
+
         } else {
             // There is a updateQuestion  registered with this id
             return new ResponseEntity<>(UpdateMessage.idNotFound, HttpStatus.OK);
@@ -87,15 +99,14 @@ public class QuestionService {
     }
 
     public ResponseEntity<?> deleteQuestion(Integer id) {
-       Question question= questionRepository.findById(id).orElse(null);
-        if (question!= null) {
+        Question question = questionRepository.findById(id).orElse(null);
+        if (question != null) {
             question.setIsdeleted(1);
-              questionRepository.save(question);
+            questionRepository.save(question);
             return new ResponseEntity<>(DeleteMessage.success, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(DeleteMessage.fail, HttpStatus.OK);
         }
     }
-
 
 }
