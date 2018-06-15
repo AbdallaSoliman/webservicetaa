@@ -61,7 +61,6 @@ public class Question implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "question_id")
     private Integer questionId;
     @Size(max = 145)
