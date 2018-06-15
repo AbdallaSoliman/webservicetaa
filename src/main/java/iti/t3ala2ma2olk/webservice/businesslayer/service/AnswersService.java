@@ -77,9 +77,9 @@ public class AnswersService {
         answers.setIsdeleted(0);
         answers.setAnswersDate(new Date());
         //   User has been added successfully
-        answersRepository.save(answers);
+ Answers result= answersRepository.save(answers);
 //            NotificationFactory.getNotification("Answers").addNewNotification(answers);
-        answersNotifications.addNewNotification(answers);
+        answersNotifications.addNewNotification(result);
         return new ResponseEntity<>(AddMessage.success, HttpStatus.OK);
 
     }

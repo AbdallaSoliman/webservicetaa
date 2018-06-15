@@ -88,9 +88,9 @@ public class QuestionService {
         question.setIsdeleted(0);
         question.setQuestionDate(new Date());
         //   Question  has been added successfully
-        questionRepository.save(question);
+        Question result=questionRepository.save(question);
         //  NotificationFactory.getNotification("Question").addNewNotification(question);
-        questionNotifications.addNewNotification(question);
+        questionNotifications.addNewNotification(result);
         return new ResponseEntity<>(AddMessage.success, HttpStatus.OK);
 
     }
