@@ -89,6 +89,7 @@ public class QuestionService {
         question.setQuestionId(null);
         question.setIsdeleted(0);
         question.setQuestionDate(new Date());
+        question.setVerified(0);
         //   Question  has been added successfully
         Question result = questionRepository.save(question);
         //  NotificationFactory.getNotification("Question").addNewNotification(question);
