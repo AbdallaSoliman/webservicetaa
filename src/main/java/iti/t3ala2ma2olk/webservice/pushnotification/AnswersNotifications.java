@@ -40,28 +40,40 @@ public class AnswersNotifications extends NotificationParent<Answers> {
 //        }
 //        return instance;
 //    }
-
-
     @Override
     public ResponseEntity<?> addNewNotification(Answers answers) {
         if (androidPushNotificationsService == null) {
             System.out.println("androidPushNotificationsService  null");
         }
         JSONObject body = new JSONObject();
-
-        body.put("to", "/topics/" + "AnswersNotifications" + answers.getAnswersId());
+        if (answers.getQuestionId() != null) {
+            body.put("to", "/topics/" + "QuestionNotifications" + answers.getQuestionId().getQuestionId());
+        }
         body.put("priority", "high");
 
         JSONObject notification = new JSONObject();
-        notification.put("title", answers.getAnswer());
-//		notification.put("body", answers.getBody());
 
-        JSONObject data = new JSONObject();
-        data.put("getPersonId", answers.getPersonId().getPersonId());
+        if (answers.getPersonId().getUsername() != null) {
+            notification.put("title", answers.getPersonId().getUsername());
+        }
+
+        if (answers.getAnswer() != null) {
+            notification.put("body", answers.getAnswer());
+        }
+
+//		notification.put("body", answers.getBody());
+        JSONObject mData = new JSONObject();
+
+        if (answers.getPersonId().getImage() != null) {
+            mData.put("Image", answers.getPersonId().getImage());
+        }
+        if (answers.getPersonId().getPersonId() != null) {
+            mData.put("getPersonId", answers.getPersonId().getPersonId());
+        }
 //		data.put("Key-2", "JSA Data 2");
 
         body.put("notification", notification);
-        body.put("data", data);
+        body.put("data", mData);
 
         /**
          * {

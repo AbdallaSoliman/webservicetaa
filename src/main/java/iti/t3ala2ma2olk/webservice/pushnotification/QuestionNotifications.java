@@ -48,11 +48,17 @@ public class QuestionNotifications  extends NotificationParent<Question>{
 		body.put("priority", "high");
  
 		JSONObject notification = new JSONObject();
+                if(question.getTitle()!=null)
 		notification.put("title", question.getTitle());
+                if(question.getBody()!=null)
 		notification.put("body", question.getBody());
 		
 		JSONObject data = new JSONObject();
-		data.put("getPersonId", question.getPersonId().getPersonId());
+                notification.put("body", question.getPersonId().getPersonId());
+		data.put("body", question.getPersonId().getPersonId());
+                if(question.getPersonId().getImage()!=null){
+                data.put("Image", question.getPersonId().getImage());
+                }
 //		data.put("Key-2", "JSA Data 2");
  
 		body.put("notification", notification);
