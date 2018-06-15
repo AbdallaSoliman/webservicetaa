@@ -5,6 +5,7 @@
  */
 package iti.t3ala2ma2olk.webservice.businesslayer.service;
 
+import iti.t3ala2ma2olk.webservice.businesslayer.factory.MessageFactory;
 import iti.t3ala2ma2olk.webservice.dal.entity.Question;
 import iti.t3ala2ma2olk.webservice.dal.repository.QuestionRepository;
 import iti.t3ala2ma2olk.webservice.dto.QuestionDTO;
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.modelmapper.ModelMapper;
 import iti.t3ala2ma2olk.webservice.businesslayer.factory.ModelMapperFactory;
+import iti.t3ala2ma2olk.webservice.businesslayer.msg.MessageDTO;
+import iti.t3ala2ma2olk.webservice.businesslayer.msg.QuestionIdDTO;
 import iti.t3ala2ma2olk.webservice.dal.entity.Answers;
 import iti.t3ala2ma2olk.webservice.pushnotification.QuestionNotifications;
 import java.util.Date;
@@ -65,16 +68,15 @@ public class QuestionService {
 
     public ResponseEntity<?> getQuestion(Integer id) {
         //abdalla start
-        QuestionDTO questionDTO=new QuestionDTO();
+        QuestionDTO questionDTO = new QuestionDTO();
         List<Answers> filteredlist = new ArrayList();
-        questionDTO =modelMapper.map(questionRepository.findById(id).orElse(null), QuestionDTO.class);
+        questionDTO = modelMapper.map(questionRepository.findById(id).orElse(null), QuestionDTO.class);
         //abdalla end
         if (questionDTO != null) {
-            
-            if(questionDTO.getAnswersCollection()!=null)
-            {
-         questionDTO.getAnswersCollection().stream().filter(predicate -> predicate.getIsdeleted() == 0).forEach(filteredlist::add);
-              questionDTO.setAnswersCollection(filteredlist);
+
+            if (questionDTO.getAnswersCollection() != null) {
+                questionDTO.getAnswersCollection().stream().filter(predicate -> predicate.getIsdeleted() == 0).forEach(filteredlist::add);
+                questionDTO.setAnswersCollection(filteredlist);
             }
             return new ResponseEntity<>(questionDTO, HttpStatus.OK);
         } else {
@@ -88,10 +90,12 @@ public class QuestionService {
         question.setIsdeleted(0);
         question.setQuestionDate(new Date());
         //   Question  has been added successfully
-        Question result=questionRepository.save(question);
+        Question result = questionRepository.save(question);
         //  NotificationFactory.getNotification("Question").addNewNotification(question);
         questionNotifications.addNewNotification(result);
-        return new ResponseEntity<>(AddMessage.success, HttpStatus.OK);
+        
+        QuestionIdDTO questionIdDTO = MessageFactory.getQuestionIdDTO(result.getQuestionId());
+        return new ResponseEntity<>(questionIdDTO, HttpStatus.OK);
 
     }
 

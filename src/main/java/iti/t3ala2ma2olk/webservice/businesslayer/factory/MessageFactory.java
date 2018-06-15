@@ -6,6 +6,7 @@
 package iti.t3ala2ma2olk.webservice.businesslayer.factory;
 
 import iti.t3ala2ma2olk.webservice.businesslayer.msg.MessageDTO;
+import iti.t3ala2ma2olk.webservice.businesslayer.msg.QuestionIdDTO;
 
 /**
  *
@@ -13,12 +14,19 @@ import iti.t3ala2ma2olk.webservice.businesslayer.msg.MessageDTO;
  */
 public class MessageFactory {
 
-    private static volatile MessageDTO instance;
+    private static volatile MessageDTO instanceMessageDTO;
+    private static volatile QuestionIdDTO instanceQuestionIdDTO;
 
     public static MessageDTO getMessageDTO(String result) {
 
-        MessageFactory.instance = new MessageDTO(result);
+        MessageFactory.instanceMessageDTO = new MessageDTO(result);
 
-        return instance;
+        return instanceMessageDTO;
+    }
+        public static QuestionIdDTO getQuestionIdDTO(int result) {
+
+        MessageFactory.instanceQuestionIdDTO = new QuestionIdDTO(result);
+
+        return instanceQuestionIdDTO;
     }
 }
