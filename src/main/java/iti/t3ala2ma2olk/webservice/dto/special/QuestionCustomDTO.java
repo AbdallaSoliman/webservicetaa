@@ -19,7 +19,7 @@ import lombok.Setter;
 public class QuestionCustomDTO {
     private Integer questionId;
     private String title;
-    private Integer numOfAns;
+    private Integer numOfAns=0;
     private Integer verified;
     private Date questionDate;
 

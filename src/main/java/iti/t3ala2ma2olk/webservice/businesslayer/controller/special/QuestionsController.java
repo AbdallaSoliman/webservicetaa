@@ -43,7 +43,12 @@ public class QuestionsController {
                 tempQuestionCustomDTO.setTitle(temp.getTitle());
                 tempQuestionCustomDTO.setQuestionDate(temp.getQuestionDate());
                 tempQuestionCustomDTO.setVerified(temp.getVerified());
-                tempQuestionCustomDTO.setNumOfAns(temp.getAnswersCollection().size());
+
+                temp.getAnswersCollection().forEach((ansTemp) -> {
+                    if(ansTemp.getIsdeleted() == 0)
+                        tempQuestionCustomDTO.setNumOfAns(tempQuestionCustomDTO.getNumOfAns()+1);
+                });
+                
                 questions.add(tempQuestionCustomDTO);
              }
          });
