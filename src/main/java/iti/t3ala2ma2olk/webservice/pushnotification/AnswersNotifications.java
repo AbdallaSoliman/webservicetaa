@@ -6,6 +6,7 @@
 package iti.t3ala2ma2olk.webservice.pushnotification;
 
 import iti.t3ala2ma2olk.webservice.dal.entity.Answers;
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.CompletableFuture;
@@ -72,19 +73,17 @@ public class AnswersNotifications extends NotificationParent<Answers> {
         if (answers.getPersonId().getPersonId() != null) {
             mData.put("getPersonId", answers.getPersonId().getPersonId());
         }
-        if (answers.getPersonId().getFirst()!= null) {
+        if (answers.getPersonId().getFirst() != null) {
             mData.put("title", answers.getPersonId().getFirst());
         }
-          mData.put("is_background", false);
-          Calendar cal = Calendar.getInstance();
-cal.setTime(new Date());
-cal.set(Calendar.MILLISECOND, 0);
-           mData.put("timestamp", cal);
-            if (answers.getPersonId().getFirst()!= null) {
+        mData.put("is_background", false);
+        Date utilDate = new Date();
+        mData.put("timestamp", new Timestamp(utilDate.getTime()));
+        if (answers.getPersonId().getFirst() != null) {
             mData.put("is_background", answers.getPersonId().getFirst());
         }
-        
-                if (answers.getPersonId().getUsername() != null) {
+
+        if (answers.getPersonId().getUsername() != null) {
             mData.put("title", answers.getPersonId().getUsername());
         }
 
