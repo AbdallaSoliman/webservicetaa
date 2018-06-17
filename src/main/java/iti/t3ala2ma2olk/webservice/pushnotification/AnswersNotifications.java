@@ -6,6 +6,7 @@
 package iti.t3ala2ma2olk.webservice.pushnotification;
 
 import iti.t3ala2ma2olk.webservice.dal.entity.Answers;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -75,7 +76,10 @@ public class AnswersNotifications extends NotificationParent<Answers> {
             mData.put("title", answers.getPersonId().getFirst());
         }
           mData.put("is_background", false);
-           mData.put("timestamp", new Date());
+          Calendar cal = Calendar.getInstance();
+cal.setTime(new Date());
+cal.set(Calendar.MILLISECOND, 0);
+           mData.put("timestamp", cal);
             if (answers.getPersonId().getFirst()!= null) {
             mData.put("is_background", answers.getPersonId().getFirst());
         }
