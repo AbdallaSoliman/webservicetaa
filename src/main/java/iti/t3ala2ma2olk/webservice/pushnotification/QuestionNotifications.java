@@ -43,57 +43,57 @@ public class QuestionNotifications  extends NotificationParent<Question>{
 
     
     public ResponseEntity<?> addNewNotification(Question question){
-        JSONObject body = new JSONObject();
-		body.put("to", "/topics/" +"QuestionNotifications"+ question.getQuestionId());
-		body.put("priority", "high");
- 
-		JSONObject notification = new JSONObject();
-                if(question.getTitle()!=null)
-		notification.put("title", question.getTitle());
-                if(question.getBody()!=null)
-		notification.put("body", question.getBody());
-		
-		JSONObject data = new JSONObject();
-                notification.put("body", question.getPersonId().getPersonId());
-		data.put("body", question.getPersonId().getPersonId());
-                if(question.getPersonId().getImage()!=null){
-                data.put("Image", question.getPersonId().getImage());
-                }
-//		data.put("Key-2", "JSA Data 2");
- 
-		body.put("notification", notification);
-		body.put("data", data);
- 
-/**
-		{
-		   "notification": {
-		      "title": "JSA Notification",
-		      "body": "Happy Message!"
-		   },
-		   "data": {
-		      "Key-1": "JSA Data 1",
-		      "Key-2": "JSA Data 2"
-		   },
-		   "to": "/topics/JavaSampleApproach",
-		   "priority": "high"
-		}
-*/
- 
-		HttpEntity<String> request = new HttpEntity<>(body.toString());
- 
-		CompletableFuture<String> pushNotification = androidPushNotificationsService.send(request);
-		CompletableFuture.allOf(pushNotification).join();
- 
-		try {
-			String firebaseResponse = pushNotification.get();
-			
-			return new ResponseEntity<>(firebaseResponse, HttpStatus.OK);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		}
- 
+//        JSONObject body = new JSONObject();
+//		body.put("to", "/topics/" +"QuestionNotifications"+ question.getQuestionId());
+//		body.put("priority", "high");
+// 
+//		JSONObject notification = new JSONObject();
+//                if(question.getTitle()!=null)
+//		notification.put("title", question.getTitle());
+//                if(question.getBody()!=null)
+//		notification.put("body", question.getBody());
+//		
+//		JSONObject data = new JSONObject();
+//                notification.put("body", question.getPersonId().getPersonId());
+//		data.put("body", question.getPersonId().getPersonId());
+//                if(question.getPersonId().getImage()!=null){
+//                data.put("Image", question.getPersonId().getImage());
+//                }
+////		data.put("Key-2", "JSA Data 2");
+// 
+//		body.put("notification", notification);
+//		body.put("data", data);
+// 
+///**
+//		{
+//		   "notification": {
+//		      "title": "JSA Notification",
+//		      "body": "Happy Message!"
+//		   },
+//		   "data": {
+//		      "Key-1": "JSA Data 1",
+//		      "Key-2": "JSA Data 2"
+//		   },
+//		   "to": "/topics/JavaSampleApproach",
+//		   "priority": "high"
+//		}
+//*/
+// 
+//		HttpEntity<String> request = new HttpEntity<>(body.toString());
+// 
+//		CompletableFuture<String> pushNotification = androidPushNotificationsService.send(request);
+//		CompletableFuture.allOf(pushNotification).join();
+// 
+//		try {
+//			String firebaseResponse = pushNotification.get();
+//			
+//			return new ResponseEntity<>(firebaseResponse, HttpStatus.OK);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		} catch (ExecutionException e) {
+//			e.printStackTrace();
+//		}
+// 
 		return new ResponseEntity<>("Push Notification ERROR!", HttpStatus.BAD_REQUEST);
     }
   

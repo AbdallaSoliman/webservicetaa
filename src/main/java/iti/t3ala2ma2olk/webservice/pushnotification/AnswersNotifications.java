@@ -6,6 +6,7 @@
 package iti.t3ala2ma2olk.webservice.pushnotification;
 
 import iti.t3ala2ma2olk.webservice.dal.entity.Answers;
+import java.util.Date;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import org.json.JSONObject;
@@ -65,10 +66,26 @@ public class AnswersNotifications extends NotificationParent<Answers> {
         JSONObject mData = new JSONObject();
 
         if (answers.getPersonId().getImage() != null) {
-            mData.put("Image", answers.getPersonId().getImage());
+            mData.put("image", answers.getPersonId().getImage());
         }
         if (answers.getPersonId().getPersonId() != null) {
             mData.put("getPersonId", answers.getPersonId().getPersonId());
+        }
+        if (answers.getPersonId().getFirst()!= null) {
+            mData.put("title", answers.getPersonId().getFirst());
+        }
+          mData.put("is_background", false);
+           mData.put("timestamp", new Date());
+            if (answers.getPersonId().getFirst()!= null) {
+            mData.put("is_background", answers.getPersonId().getFirst());
+        }
+        
+                if (answers.getPersonId().getUsername() != null) {
+            mData.put("title", answers.getPersonId().getUsername());
+        }
+
+        if (answers.getAnswer() != null) {
+            mData.put("message", answers.getAnswer());
         }
 //		data.put("Key-2", "JSA Data 2");
 
