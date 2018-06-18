@@ -90,6 +90,7 @@ public class QuestionService {
 
         question.setQuestionId(null);
         question.setIsdeleted(0);
+        question.setClosed(0);
         question.setQuestionDate(new Timestamp(Calendar.getInstance().getTime().getTime()));
         question.setVerified(0);
         //   Question  has been added successfully
