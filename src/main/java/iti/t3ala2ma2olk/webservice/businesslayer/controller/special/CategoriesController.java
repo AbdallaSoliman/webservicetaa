@@ -191,6 +191,7 @@ public class CategoriesController {
          
          return count;
     }
+    
     @Transactional
     @RequestMapping("/MainCategoriesSpecial")
     public List<MainCategoriesSpecial> getMainCategoriesSpecial(@PageableDefault(value=10, page=0) Pageable pageable){
@@ -199,7 +200,6 @@ public class CategoriesController {
         List<MainCatDTOSpe> dataList=null;
         int chkMain;
         
-    
         for (int i=0;i<mainCategories.size();++i){
             MainCategoriesSpecial temp=new MainCategoriesSpecial();
             temp.setCatName(mainCategories.get(i).getCatName());
@@ -243,6 +243,7 @@ public class CategoriesController {
         }
         
         return mainCategoriesSpecial;
+        
     }
        
 /*end ali */
