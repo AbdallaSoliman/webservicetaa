@@ -29,10 +29,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.PersistenceContext;
+import javax.persistence.EntityManager;
+
+import org.springframework.transaction.annotation.Transactional;
+
+
 /**
  *
  * @author abdalla
  */
+
+
 
 @RestController
 public class CategoriesController {
@@ -41,6 +49,8 @@ public class CategoriesController {
         
             @Autowired
     private MainCategoriesService mainCategoriesService; 
+    @PersistenceContext
+    private EntityManager em;
             
                     
     @Autowired
@@ -181,24 +191,26 @@ public class CategoriesController {
          
          return count;
     }
-    
+    @Transactional
     @RequestMapping("/MainCategoriesSpecial")
     public List<MainCategoriesSpecial> getMainCategoriesSpecial(@PageableDefault(value=10, page=0) Pageable pageable){
         List<MainCategories> mainCategories=mainCategoriesService.getAllMainCategories(pageable);
         List<MainCategoriesSpecial> mainCategoriesSpecial=new ArrayList<MainCategoriesSpecial>();
         List<MainCatDTOSpe> dataList=null;
         int chkMain;
+        
+    
         for (int i=0;i<mainCategories.size();++i){
             MainCategoriesSpecial temp=new MainCategoriesSpecial();
             temp.setCatName(mainCategories.get(i).getCatName());
             temp.setMainCategoriesId(mainCategories.get(i).getMainCategoriesId());
             
             if(mainCategories.get(i).getCatName().equals("MainCategoriy")){
-                 dataList=getAllMainCategoriesAndQuestions(null);
+                 dataList=getAllMainCategoriesAndQuestions(pageable);
                  chkMain=1;
              }
             else if(mainCategories.get(i).getCatName().equals("AskByPlace")){
-                 dataList=getAllAskByPlaceAndQuestions(null);
+                 dataList=getAllAskByPlaceAndQuestions(pageable);
                  chkMain=2;
              }
             else{
@@ -206,7 +218,8 @@ public class CategoriesController {
             }
             
              for (SubCat tempSub : mainCategories.get(i).getSubCatCollection()) {
-
+                 em.refresh(tempSub);
+                 
                 SubCatSpecial tempSubCat=new SubCatSpecial();
                 tempSubCat.setDescription(tempSub.getDescription());
                 if(chkMain!=0 && chkMain!=3){
