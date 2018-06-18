@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import iti.t3ala2ma2olk.webservice.dal.entity.NotifiAnswers;
 import iti.t3ala2ma2olk.webservice.dal.entity.Question;
 import iti.t3ala2ma2olk.webservice.security.model.Person;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Id;

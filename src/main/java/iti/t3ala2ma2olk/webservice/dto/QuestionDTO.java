@@ -8,6 +8,7 @@ package iti.t3ala2ma2olk.webservice.dto;
 import iti.t3ala2ma2olk.webservice.dal.entity.Answers;
 import iti.t3ala2ma2olk.webservice.dal.entity.SubCat;
 import iti.t3ala2ma2olk.webservice.security.model.Person;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;

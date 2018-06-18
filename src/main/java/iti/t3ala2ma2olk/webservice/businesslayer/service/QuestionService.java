@@ -24,6 +24,8 @@ import iti.t3ala2ma2olk.webservice.businesslayer.msg.MessageDTO;
 import iti.t3ala2ma2olk.webservice.businesslayer.msg.QuestionIdDTO;
 import iti.t3ala2ma2olk.webservice.dal.entity.Answers;
 import iti.t3ala2ma2olk.webservice.pushnotification.QuestionNotifications;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +90,7 @@ public class QuestionService {
 
         question.setQuestionId(null);
         question.setIsdeleted(0);
-        question.setQuestionDate(new Date());
+        question.setQuestionDate(new Timestamp(Calendar.getInstance().getTime().getTime()));
         question.setVerified(0);
         //   Question  has been added successfully
         Question result = questionRepository.save(question);

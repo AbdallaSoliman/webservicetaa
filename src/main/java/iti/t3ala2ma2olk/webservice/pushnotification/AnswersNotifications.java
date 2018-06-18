@@ -77,7 +77,7 @@ public class AnswersNotifications extends NotificationParent<Answers> {
             mData.put("title", answers.getPersonId().getFirst());
         }
         mData.put("is_background", false);
-        Date utilDate = new Date();
+        Date utilDate = new Timestamp(Calendar.getInstance().getTime().getTime());
         mData.put("timestamp", new Timestamp(utilDate.getTime()));
         if (answers.getPersonId().getFirst() != null) {
             mData.put("is_background", answers.getPersonId().getFirst());

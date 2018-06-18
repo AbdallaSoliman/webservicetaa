@@ -20,6 +20,8 @@ import org.modelmapper.ModelMapper;
 import iti.t3ala2ma2olk.webservice.businesslayer.factory.ModelMapperFactory;
 import iti.t3ala2ma2olk.webservice.dal.entity.Answers;
 import iti.t3ala2ma2olk.webservice.pushnotification.AnswersNotifications;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -75,7 +77,7 @@ public class AnswersService {
 
         answers.setAnswersId(null);
         answers.setIsdeleted(0);
-        answers.setAnswersDate(new Date());
+        answers.setAnswersDate(new Timestamp(Calendar.getInstance().getTime().getTime()));
         //   User has been added successfully
  Answers result= answersRepository.save(answers);
 //            NotificationFactory.getNotification("Answers").addNewNotification(answers);

@@ -8,6 +8,7 @@ package iti.t3ala2ma2olk.webservice.dal.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import iti.t3ala2ma2olk.webservice.security.model.Person;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -74,7 +75,7 @@ public class Answers implements Serializable {
     @Column(name = "notifi")
     private Integer notifi;
     @Column(name = "answers_date")
-    @Temporal(TemporalType.DATE)
+
     private Date answersDate;
     
     @ManyToMany(mappedBy = "answersCollection")
