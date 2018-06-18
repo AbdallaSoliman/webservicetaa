@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -94,10 +95,11 @@ public class Question implements Serializable {
     private Date questionDate;
     @Column(name = "closed")
     private Integer closed;
+    
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "belongs_to", joinColumns = {
         @JoinColumn(name = "question_id", referencedColumnName = "question_id")}, inverseJoinColumns = {
         @JoinColumn(name = "sub_cat_id", referencedColumnName = "sub_cat_id")})
-    @ManyToMany
     private Collection<SubCat> subCatCollection;
     @ManyToMany(mappedBy = "questionCollection")
     private Collection<Person> personRateCollection;

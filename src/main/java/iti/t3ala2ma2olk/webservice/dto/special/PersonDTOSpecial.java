@@ -30,8 +30,6 @@ public class PersonDTOSpecial {
     }
     private static final long serialVersionUID = 1L;
 
-    
-    
     private Integer personId;
 
     private String image;
@@ -52,18 +50,6 @@ public class PersonDTOSpecial {
     private String username;
 
     private Date lastPasswordResetDate;
-
-    private List<Authority> authorities;
-
-    private Collection<Answers> answersCollection;
-
-    private Collection<Question> questionCollection;
-
-    private Collection<Question> askedQuestionCollection;
-    
-    private Collection<NotifiAnswers> notifiAnswersCollection;
-
-    private Collection<Report> reportCollection;
 
     private CustomerService customerService;
 
