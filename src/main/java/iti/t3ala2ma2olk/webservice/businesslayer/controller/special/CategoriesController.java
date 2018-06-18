@@ -9,6 +9,8 @@ import iti.t3ala2ma2olk.webservice.businesslayer.service.MainCategoriesService;
 import iti.t3ala2ma2olk.webservice.businesslayer.service.SubCatService;
 import iti.t3ala2ma2olk.webservice.businesslayer.service.special.CategoriesService;
 import iti.t3ala2ma2olk.webservice.dal.entity.MainCategories;
+import iti.t3ala2ma2olk.webservice.dal.entity.Question;
+import iti.t3ala2ma2olk.webservice.dal.entity.SubCat;
 import iti.t3ala2ma2olk.webservice.dto.SubCatDTO;
 import iti.t3ala2ma2olk.webservice.dto.special.CategoriesDTO;
 import iti.t3ala2ma2olk.webservice.dto.special.DescriptionDTO;
@@ -60,19 +62,20 @@ public class CategoriesController {
       
       
       /*start ali */
-@RequestMapping("/MainCategoryWithSubs")
+
     public List<MainCatDTOSpe> getAllMainCategoriesAndQuestions(@PageableDefault(value=10, page=0) Pageable pageable) {
         List<MainCategories> catList=mainCategoriesService.getAllMainCategories(pageable);
        
          List<MainCatDTOSpe> catDTOList=new ArrayList<MainCatDTOSpe>();
          for (int i=0;i<catList.size();++i){
-             if(catList.get(i).getCatName().equals("Main")){
+             if(catList.get(i).getCatName().equals("MainCategoriy")){
                  final int loop=i;
                  catList.get(i).getSubCatCollection().forEach((temp1) -> {
 
                      if(!temp1.getSubCatName().equals("notValue")){
                          MainCatDTOSpe mainTemp=new MainCatDTOSpe();
                          mainTemp.setCatName(temp1.getSubCatName());
+                         if(temp1.getDescription().equals("General"))
                          mainTemp.setImgUrl(temp1.getImgUrl());
                          List <SubCatDTOSpe> tempSubs=new ArrayList <SubCatDTOSpe>();
                          SubCatDTOSpe subTemp=new SubCatDTOSpe();
@@ -86,6 +89,61 @@ public class CategoriesController {
                                 SubCatDTOSpe subTemp2=new SubCatDTOSpe();
                                 subTemp2.setCatId(temp2.getSubCatId());
                                 subTemp2.setCatName(temp2.getDescription());
+                                if(temp2.getDescription().equals("General"))
+                                mainTemp.setImgUrl(temp2.getImgUrl());
+                                subTemp2.setNumberOfQues(getNumberOfQuestion(temp2.getSubCatId()));
+                                tempSubs.add(subTemp2);
+                                temp2.setSubCatName("notValue");
+                             }
+                         
+                         });
+                         temp1.setSubCatName("notValue");
+                         mainTemp.setSubs(tempSubs);
+
+                         mainTemp.getSubs().forEach((subTempCount) -> {
+                             mainTemp.setNumberOfQues(mainTemp.getNumberOfQues()+subTempCount.getNumberOfQues());
+                             
+                         });
+                         catDTOList.add(mainTemp);
+                     }
+                });
+             }
+         }
+         
+         
+        return catDTOList;
+    }     
+    
+    
+
+    public List<MainCatDTOSpe> getAllAskByPlaceAndQuestions(@PageableDefault(value=10, page=0) Pageable pageable) {
+        List<MainCategories> catList=mainCategoriesService.getAllMainCategories(pageable);
+       
+         List<MainCatDTOSpe> catDTOList=new ArrayList<MainCatDTOSpe>();
+         for (int i=0;i<catList.size();++i){
+             if(catList.get(i).getCatName().equals("AskByPlace")){
+                 final int loop=i;
+                 catList.get(i).getSubCatCollection().forEach((temp1) -> {
+
+                     if(!temp1.getSubCatName().equals("notValue")){
+                         MainCatDTOSpe mainTemp=new MainCatDTOSpe();
+                         mainTemp.setCatName(temp1.getSubCatName());
+                         if(temp1.getDescription().equals("General"))
+                         mainTemp.setImgUrl(temp1.getImgUrl());
+                         List <SubCatDTOSpe> tempSubs=new ArrayList <SubCatDTOSpe>();
+                         SubCatDTOSpe subTemp=new SubCatDTOSpe();
+                         subTemp.setCatId(temp1.getSubCatId());
+                         subTemp.setCatName(temp1.getDescription());
+                         subTemp.setNumberOfQues(getNumberOfQuestion(temp1.getSubCatId()));
+                         tempSubs.add(subTemp);
+                         
+                         catList.get(loop).getSubCatCollection().forEach((temp2) -> {
+                             if(temp1.getSubCatName().equals(temp2.getSubCatName()) && temp1 != temp2 ){
+                                SubCatDTOSpe subTemp2=new SubCatDTOSpe();
+                                subTemp2.setCatId(temp2.getSubCatId());
+                                subTemp2.setCatName(temp2.getDescription());
+                                if(temp2.getDescription().equals("General"))
+                                mainTemp.setImgUrl(temp2.getImgUrl());
                                 subTemp2.setNumberOfQues(getNumberOfQuestion(temp2.getSubCatId()));
                                 tempSubs.add(subTemp2);
                                  
@@ -107,39 +165,72 @@ public class CategoriesController {
          
          
         return catDTOList;
-    }     
+    } 
+    
+    
+    
     
     public int getNumberOfQuestion(int catID){
          SubCatDTO  subCat=subCatService.getSubCatWithId(catID);
-         return subCat.getQuestionCollection().size();
+         int count=0;
+
+         for (Question tempQuestion : subCat.getQuestionCollection()) {
+             if(tempQuestion.getIsdeleted() == 0 )
+                 count++;
+         }
+         
+         return count;
     }
     
     @RequestMapping("/MainCategoriesSpecial")
     public List<MainCategoriesSpecial> getMainCategoriesSpecial(@PageableDefault(value=10, page=0) Pageable pageable){
         List<MainCategories> mainCategories=mainCategoriesService.getAllMainCategories(pageable);
         List<MainCategoriesSpecial> mainCategoriesSpecial=new ArrayList<MainCategoriesSpecial>();
-        
+        List<MainCatDTOSpe> dataList=null;
+        int chkMain;
         for (int i=0;i<mainCategories.size();++i){
             MainCategoriesSpecial temp=new MainCategoriesSpecial();
             temp.setCatName(mainCategories.get(i).getCatName());
             temp.setMainCategoriesId(mainCategories.get(i).getMainCategoriesId());
             
-            mainCategories.get(i).getSubCatCollection().forEach((tempSub) -> {
+            if(mainCategories.get(i).getCatName().equals("MainCategoriy")){
+                 dataList=getAllMainCategoriesAndQuestions(null);
+                 chkMain=1;
+             }
+            else if(mainCategories.get(i).getCatName().equals("AskByPlace")){
+                 dataList=getAllAskByPlaceAndQuestions(null);
+                 chkMain=2;
+             }
+            else{
+                chkMain=3;
+            }
             
+             for (SubCat tempSub : mainCategories.get(i).getSubCatCollection()) {
+
                 SubCatSpecial tempSubCat=new SubCatSpecial();
                 tempSubCat.setDescription(tempSub.getDescription());
-                tempSubCat.setImgUrl(tempSub.getImgUrl());
-                tempSubCat.setNumOfQuestion(tempSub.getQuestionCollection().size());
+                if(chkMain!=0 && chkMain!=3){
+                     for (MainCatDTOSpe tempMainCatDTOSpe : dataList){
+                         if(tempSub.getSubCatName().equals(tempMainCatDTOSpe.getCatName())){
+                             tempSubCat.setImgUrl(tempMainCatDTOSpe.getImgUrl());
+                             tempSubCat.setNumOfQuestion(tempMainCatDTOSpe.getNumberOfQues());
+                         }
+                     }
+                }
+                else{
+                    tempSubCat.setImgUrl(tempSub.getImgUrl());
+                    tempSubCat.setNumOfQuestion(tempSub.getQuestionCollection().size());
+                }
                 tempSubCat.setSubCatId(tempSub.getSubCatId());
                 tempSubCat.setSubCatName(tempSub.getSubCatName());
                 temp.getSubCatCollection().add(tempSubCat);
-            });
+            }
             
             mainCategoriesSpecial.add(temp);
         }
         
         return mainCategoriesSpecial;
     }
-    
+       
 /*end ali */
 }

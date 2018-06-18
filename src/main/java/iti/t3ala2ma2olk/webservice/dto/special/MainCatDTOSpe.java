@@ -21,7 +21,7 @@ public class MainCatDTOSpe {
 
     private String imgUrl;
     
-    private int numberOfQues;
+    private int numberOfQues=0;
     
     List <SubCatDTOSpe> subs;
 }
