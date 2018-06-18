@@ -36,9 +36,9 @@ public class PersonSpecialService {
     public ResponseEntity<?> getPerson(Integer id) {
 
         Person person=personRepository.findById(id).orElse(null);
-        System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh "+person.getQuestionCollection().size());
+       
         PersonDTOSpecial personDTO=modelMapper.map(personRepository.findById(id).orElse(null), PersonDTOSpecial.class);
-        personDTO.setNumOfAskedQuestions(person.getQuestionCollection().size());
+        personDTO.setNumOfAskedQuestions(person.getAskedQuestionCollection().size());
         
         if (personDTO != null) {
             return new ResponseEntity<>(personDTO, HttpStatus.OK);

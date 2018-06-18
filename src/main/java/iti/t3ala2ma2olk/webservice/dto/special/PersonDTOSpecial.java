@@ -59,6 +59,8 @@ public class PersonDTOSpecial {
 
     private Collection<Question> questionCollection;
 
+    private Collection<Question> askedQuestionCollection;
+    
     private Collection<NotifiAnswers> notifiAnswersCollection;
 
     private Collection<Report> reportCollection;

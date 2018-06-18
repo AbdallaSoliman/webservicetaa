@@ -108,8 +108,17 @@ public class Person implements Serializable {
     @ManyToMany
     private Collection<Question> questionCollection;
     
-//    @OneToMany(mappedBy = "personId")
-//    private Collection<Question> questionCollection;
+    @OneToMany(mappedBy = "personId")
+    private Collection<Question> askedQuestionCollection;
+
+    @JsonIgnore
+    public Collection<Question> getAskedQuestionCollection() {
+        return askedQuestionCollection;
+    }
+
+    public void setAskedQuestionCollection(Collection<Question> askedQuestionCollection) {
+        this.askedQuestionCollection = askedQuestionCollection;
+    }
     
     @OneToMany(mappedBy = "personId")    
     private Collection<NotifiAnswers> notifiAnswersCollection;
