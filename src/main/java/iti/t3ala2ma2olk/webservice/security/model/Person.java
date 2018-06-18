@@ -275,14 +275,6 @@ public class Person implements Serializable {
         this.questionCollection = questionCollection;
     }
 
-
-
-
-
-
-
-    
-    
     
     
     @Override
@@ -309,5 +301,6 @@ public class Person implements Serializable {
     public String toString() {
         return "iti.t3ala2ma2olk.webservice.security.model.Person[ personId=" + personId + " ]";
     }
+
     
 }

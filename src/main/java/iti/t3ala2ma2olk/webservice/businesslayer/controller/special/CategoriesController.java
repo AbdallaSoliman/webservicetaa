@@ -29,11 +29,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+//transactional
 import javax.persistence.PersistenceContext;
 import javax.persistence.EntityManager;
-
 import org.springframework.transaction.annotation.Transactional;
-
 
 /**
  *
@@ -49,6 +48,7 @@ public class CategoriesController {
         
             @Autowired
     private MainCategoriesService mainCategoriesService; 
+            
     @PersistenceContext
     private EntityManager em;
             
