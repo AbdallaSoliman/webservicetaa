@@ -62,7 +62,7 @@ public class QuestionSearchService {
             // throw ex;
         }
         
-        searchResults.stream().filter(predicate->predicate.getIsdeleted()!=0).forEach(question ->
+        searchResults.stream().filter(predicate->predicate.getIsdeleted()==0).forEach(question ->
                 searchResultsWithNumbers.add(new QuestionCustomDTO(
                 question.getQuestionId(),
                 question.getTitle(),
