@@ -92,14 +92,14 @@ public class Question implements Serializable {
     @Column(name = "notifi")
     private Integer notifi;
     @Column(name = "question_date")
+    @Temporal(TemporalType.DATE)
     private Date questionDate;
     @Column(name = "closed")
     private Integer closed;
-    
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "belongs_to", joinColumns = {
         @JoinColumn(name = "question_id", referencedColumnName = "question_id")}, inverseJoinColumns = {
         @JoinColumn(name = "sub_cat_id", referencedColumnName = "sub_cat_id")})
+    @ManyToMany
     private Collection<SubCat> subCatCollection;
     @ManyToMany(mappedBy = "questionCollection")
     private Collection<Person> personRateCollection;

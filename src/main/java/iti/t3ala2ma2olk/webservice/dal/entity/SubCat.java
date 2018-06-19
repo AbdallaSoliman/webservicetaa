@@ -16,7 +16,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -55,10 +54,7 @@ public class SubCat implements Serializable {
     @Column(name = "description")
     @NotNull
     private String description;
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(name = "belongs_to", joinColumns = {
-        @JoinColumn(name = "sub_cat_id", referencedColumnName = "sub_cat_id")}, inverseJoinColumns = {
-        @JoinColumn(name = "question_id", referencedColumnName = "question_id")})
+    @ManyToMany(mappedBy = "subCatCollection")
     private Collection<Question> questionCollection;
     @JoinColumn(name = "main_categories_id", referencedColumnName = "main_categories_id")
     @ManyToOne
