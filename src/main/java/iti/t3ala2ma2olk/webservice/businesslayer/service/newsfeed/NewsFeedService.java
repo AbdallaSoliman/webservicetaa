@@ -43,11 +43,11 @@ public class NewsFeedService {
 
 
         
-        pages.getContent().stream().forEach(question -> 
+        pages.getContent().stream().filter(predicate->predicate.getIsdeleted()==0).forEach((Question question) -> 
                 searchResultsWithNumbers.add(new QuestionCustomDTO(
                 question.getQuestionId(),
                 question.getTitle(),
-                answersByQuestionIdRepository.findByQuestionId(question).size(),
+               (int)answersByQuestionIdRepository.findByQuestionId(question).stream().filter(predicate->predicate.getIsdeleted()==0).count(),
                 question.getVerified(),
                  question.getQuestionDate()
                 )));
