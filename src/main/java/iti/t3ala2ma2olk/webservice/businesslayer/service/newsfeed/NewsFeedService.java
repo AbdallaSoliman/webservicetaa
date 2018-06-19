@@ -32,29 +32,28 @@ public class NewsFeedService {
         @Autowired
     private QuestionRepository questionRepository;
         public List<QuestionCustomDTO> getNewsFeed(Pageable pageable) {
-      
-        
-        
-        
-        Page<Question> pages = null;
-        List<QuestionCustomDTO> searchResultsWithNumbers = new ArrayList();
-    
-            pages = questionRepository.findAll(pageable);
+         //abdalla start
+        List<Question> list = new ArrayList();
+        List<QuestionCustomDTO> filteredlist = new ArrayList();
 
-
-        
-        pages.getContent().stream().filter(predicate->predicate.getIsdeleted()==0).forEach((Question question) -> 
-                searchResultsWithNumbers.add(new QuestionCustomDTO(
+        questionRepository.findAll().forEach(list::add);
+                list.stream().filter(predicate->predicate.getIsdeleted()==0).forEach((Question question) -> 
+                filteredlist.add(new QuestionCustomDTO(
                 question.getQuestionId(),
                 question.getTitle(),
                (int)answersByQuestionIdRepository.findByQuestionId(question).stream().filter(predicate->predicate.getIsdeleted()==0).count(),
                 question.getVerified(),
                  question.getQuestionDate()
                 )));
-       
+        int start = (int) pageable.getOffset();
+        int end = (start + pageable.getPageSize()) > filteredlist.size() ? filteredlist.size() : (start + pageable.getPageSize());
+        Page<QuestionCustomDTO> pages = new PageImpl<QuestionCustomDTO>(filteredlist.subList(start, end), pageable, filteredlist.size());
 
+        return pages.getContent();
+        //abdalla end     
         
-        return searchResultsWithNumbers;
+        
+      
 
     } 
 }
