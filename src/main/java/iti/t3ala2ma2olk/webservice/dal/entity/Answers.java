@@ -75,7 +75,7 @@ public class Answers implements Serializable {
     @Column(name = "notifi")
     private Integer notifi;
     @Column(name = "answers_date")
-
+    @Temporal(TemporalType.DATE)
     private Date answersDate;
     
     @ManyToMany(mappedBy = "answersCollection")
