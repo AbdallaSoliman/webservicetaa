@@ -66,7 +66,7 @@ public class QuestionSearchService {
                 searchResultsWithNumbers.add(new QuestionCustomDTO(
                 question.getQuestionId(),
                 question.getTitle(),
-                answersByQuestionIdRepository.findByQuestionId(question).size(),
+                (int)question.getAnswersCollection().stream().filter(predicate->predicate.getIsdeleted()==0).count(),
                 question.getVerified(),
                  question.getQuestionDate()
                 )));

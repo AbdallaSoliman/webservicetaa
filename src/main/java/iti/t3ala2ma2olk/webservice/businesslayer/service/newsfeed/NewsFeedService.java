@@ -41,7 +41,7 @@ public class NewsFeedService {
                 filteredlist.add(new QuestionCustomDTO(
                 question.getQuestionId(),
                 question.getTitle(),
-               (int)answersByQuestionIdRepository.findByQuestionId(question).stream().filter(predicate->predicate.getIsdeleted()==0).count(),
+                (int)question.getAnswersCollection().stream().filter(predicate->predicate.getIsdeleted()==0).count(),
                 question.getVerified(),
                  question.getQuestionDate()
                 )));
